@@ -1,0 +1,64 @@
+using UnityEngine;
+
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
+public class PlayerController : MonoBehaviour
+{
+    [Header("Movement Settings")]
+    [SerializeField] private float moveSpeed = 5f;
+
+    private Rigidbody2D rb;
+    private Animator animator;
+    private Vector2 movementInput;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        HandleInput();
+        UpdateAnimation();
+    }
+
+    private void FixedUpdate()
+    {
+        MovePlayer();
+    }
+
+    private void HandleInput()
+    {
+        // Use GetAxisRaw for movement (-1, 0, or 1)
+        movementInput.x = Input.GetAxisRaw("Horizontal");
+        movementInput.y = Input.GetAxisRaw("Vertical");
+
+        // Normalize the movement vector to prevent faster diagonal speed
+        if (movementInput.sqrMagnitude > 1f)
+        {
+            movementInput.Normalize();
+        }
+    }
+
+    private void UpdateAnimation()
+    {
+        // Determine if player is actively moving
+        bool isWalking = movementInput.magnitude > 0f;
+        animator.SetBool("isWalking", isWalking);
+
+        // Only update blend tree directions when moving 
+        if (isWalking)
+        {
+            animator.SetFloat("moveX", movementInput.x);
+            animator.SetFloat("moveY", movementInput.y);
+        }
+    }
+
+    private void MovePlayer()
+    {
+        // Calculate new position and apply it to the Rigidbody2D
+        Vector2 newPosition = rb.position + movementInput * (moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(newPosition);
+    }
+}
