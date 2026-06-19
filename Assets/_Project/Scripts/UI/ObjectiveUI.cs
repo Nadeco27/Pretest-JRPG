@@ -1,62 +1,70 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class ObjectiveUI : MonoBehaviour
 {
-    [Header("UI Component References")]
-    [SerializeField] private Image statusImage;
-    [SerializeField] private TextMeshProUGUI descriptionText;
+    [Header("UI Spawning References")]
+    [SerializeField] private Transform rowsContainer;
+    [SerializeField] private ObjectiveRowUI rowPrefab;
 
-    [Header("Fade Animation Adjustments")]
+    [Header("Fade Settings")]
     [SerializeField] private float fadeDuration = 0.5f;
-    [SerializeField] private float completeDisplayDelay = 0.8f;
 
     private CanvasGroup canvasGroup;
     private Coroutine activeFadeRoutine;
+    
+    // Tracks spawned rows by their objective ID for easy access
+    private Dictionary<string, ObjectiveRowUI> activeRows = new Dictionary<string, ObjectiveRowUI>();
 
     private void Awake()
     {
-        // Initialize and ensure UI starts fully transparent
         canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.alpha = 0f;
     }
 
-    // Handles drawing a brand new objective to the HUD layout
-    public void DisplayNewObjective(ObjectiveData data)
+    // Instantiates UI prefabs for every objective in the current group
+    public void DisplayNewObjectiveGroup(List<ObjectiveData> objectives)
     {
-        statusImage.sprite = data.emptyCheckboxSprite;
-        descriptionText.text = data.description;
+        // Clean up previous objective rows
+        foreach (Transform child in rowsContainer) 
+        {
+            Destroy(child.gameObject);
+        }
+        activeRows.Clear();
+
+        // Spawn and map new rows
+        foreach (var obj in objectives)
+        {
+            ObjectiveRowUI newRow = Instantiate(rowPrefab, rowsContainer);
+            newRow.Initialize(obj);
+            activeRows.Add(obj.objectiveId, newRow);
+        }
+
         TriggerFade(1f);
     }
 
-    // Handles the checked box transition before dissolving away completely
-    public IEnumerator CompleteObjectiveRoutine(ObjectiveData data)
+    // Targets a specific row to update its checkbox
+    public void CompleteSpecificObjective(string objectiveId)
     {
-        statusImage.sprite = data.checkedCheckboxSprite;
-        yield return new WaitForSeconds(completeDisplayDelay);
-        yield return StartCoroutine(FadeCanvasRoutine(0f));
+        if (activeRows.TryGetValue(objectiveId, out ObjectiveRowUI row))
+        {
+            row.MarkComplete();
+        }
     }
 
-    // Public controller method to safely trigger interpolation toggle
     public void ToggleVisibility(bool isVisible)
     {
         TriggerFade(isVisible ? 1f : 0f);
     }
 
-    // Directs the routine pipeline and avoids animation overlap conflicts
     private void TriggerFade(float targetAlpha)
     {
-        if (activeFadeRoutine != null)
-        {
-            StopCoroutine(activeFadeRoutine);
-        }
+        if (activeFadeRoutine != null) StopCoroutine(activeFadeRoutine);
         activeFadeRoutine = StartCoroutine(FadeCanvasRoutine(targetAlpha));
     }
 
-    // Coroutine calculation to interpolate transparency alpha over time
     private IEnumerator FadeCanvasRoutine(float targetAlpha)
     {
         float startAlpha = canvasGroup.alpha;
