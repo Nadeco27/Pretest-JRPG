@@ -56,6 +56,12 @@ public class PlayerController : MonoBehaviour
         {
             movementInput.Normalize();
         }
+
+        // TUTORIAL : If there is any movement input detected, notify the objective manager
+        if (movementInput.magnitude > 0f)
+        {
+            ObjectiveManager.Instance.NotifyObjectiveProgress("WalkTutorial");
+        }
     }
 
     private void UpdateAnimation()
