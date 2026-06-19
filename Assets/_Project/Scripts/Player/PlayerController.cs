@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Vector2 movementInput;
 
+    // Variable to check allowed movement in previous frame
+    private bool wasMovementAllowed = true;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -21,15 +24,29 @@ public class PlayerController : MonoBehaviour
     {
         HandleInput();
         UpdateAnimation();
+
+        // Save movement status in frame to check in next frame
+        wasMovementAllowed = PlayerStateManager.isMovementAllowed;
     }
 
     private void FixedUpdate()
     {
-        MovePlayer();
+        // Only execute only if player manual movement is allowed
+        if (PlayerStateManager.isMovementAllowed)
+        {
+            MovePlayer();
+        }
     }
 
     private void HandleInput()
     {
+        // Block input and reset vector if movement is not allowed
+        if (PlayerStateManager.isMovementAllowed == false)
+        {
+            movementInput = Vector2.zero;
+            return;
+        }
+
         // Use GetAxisRaw for movement (-1, 0, or 1)
         movementInput.x = Input.GetAxisRaw("Horizontal");
         movementInput.y = Input.GetAxisRaw("Vertical");
@@ -43,6 +60,19 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAnimation()
     {
+        // Force idle animation if this frame player lose control movement
+        if (wasMovementAllowed == true && PlayerStateManager.isMovementAllowed == false)
+        {
+            animator.SetBool("isWalking", false);
+            return;
+        }
+
+        // When in cutscene, stop function
+        if (PlayerStateManager.isMovementAllowed == false)
+        {
+            return;
+        }
+
         // Determine if player is actively moving
         bool isWalking = movementInput.magnitude > 0f;
         animator.SetBool("isWalking", isWalking);
