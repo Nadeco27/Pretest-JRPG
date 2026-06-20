@@ -11,6 +11,10 @@ public class ScreenTransitionManager : MonoBehaviour
     [SerializeField] private Material transitionMaterial;
     [SerializeField] private float transitionDuration = 1.5f;
 
+    [Header("UI References")]
+    [Tooltip("Reference to the Canvas holding the transition image.")]
+    [SerializeField] private Canvas transitionCanvas;
+
     // Shader Graph property identifier
     private readonly int radiusPropertyID = Shader.PropertyToID("_Radius");
     private bool isTransitioning = false;
@@ -21,11 +25,11 @@ public class ScreenTransitionManager : MonoBehaviour
         {
             Instance = this;
             
-            DontDestroyOnLoad(transform.root.gameObject);
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(transform.root.gameObject);
+            Destroy(gameObject);
             return;
         }
     }
@@ -48,8 +52,20 @@ public class ScreenTransitionManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        // Assign the new scene's camera before playing the animation
+        AssignCameraToCanvas();
+
         // Automatically play Iris-In transition whenever any new scene loads
         TriggerIrisIn();
+    }
+
+    private void AssignCameraToCanvas()
+    {
+        if (transitionCanvas != null)
+        {
+            // Camera.main automatically finds the first enabled camera tagged "MainCamera"
+            transitionCanvas.worldCamera = Camera.main;
+        }
     }
 
     public void TriggerIrisIn()

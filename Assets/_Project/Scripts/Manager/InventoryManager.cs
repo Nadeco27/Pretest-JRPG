@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class InventoryItem
@@ -27,13 +28,43 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        // Enforce persistent singleton architecture
+        if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+                return;
+            }
     }
 
     private void Update()
     {
         HandleKeyboardInput();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        isDialogueActive = false;
+    }
+
+    // Dynamic UI binding registration method
+    public void RegisterBackpackUI(BackpackUI ui)
+    {
+        backpackUI = ui;
     }
 
     public void ToggleBackpackFromButton()

@@ -221,7 +221,6 @@ GameObject:
   - component: {fileID: 54707045}
   - component: {fileID: 54707048}
   - component: {fileID: 54707047}
-  - component: {fileID: 54707046}
   m_Layer: 0
   m_Name: TransitionCanvas
   m_TagString: Untagged
@@ -242,30 +241,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 562350663}
-  m_Father: {fileID: 910339146}
+  m_Father: {fileID: 1826262148}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &54707046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54707044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &54707047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2665,7 +2647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 2100000, guid: 42a3c3f436ee5454db7b930470991d73, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3304,19 +3286,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 665867743}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1137777994}
-        m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: ToggleBackpackFromButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &665867743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3467,10 +3437,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1601270068}
-  - {fileID: 1137777993}
   - {fileID: 2043934771}
   - {fileID: 725124468}
-  - {fileID: 1826262148}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &761638872
@@ -4904,7 +4872,6 @@ Transform:
   m_Children:
   - {fileID: 951245846}
   - {fileID: 1435219797}
-  - {fileID: 54707045}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &951245842
@@ -5662,12 +5629,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1137777992}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 995.7738, y: 579.91364, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 742117765}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1137777994
 MonoBehaviour:
@@ -6767,6 +6734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BackpackUI
   maxSlots: 5
+  backpackButton: {fileID: 665867742}
   slotContainer: {fileID: 388457079}
   slotPrefab: {fileID: 81881399056086150, guid: ab95323c5d234df4484fc71909d081d0, type: 3}
   descriptionPanel: {fileID: 1350236896}
@@ -8112,12 +8080,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1826262147}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 995.7738, y: 579.91364, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 742117765}
+  m_Children:
+  - {fileID: 54707045}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1826262149
 MonoBehaviour:
@@ -8133,6 +8102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScreenTransitionManager
   transitionMaterial: {fileID: 2100000, guid: 42a3c3f436ee5454db7b930470991d73, type: 2}
   transitionDuration: 1.5
+  transitionCanvas: {fileID: 54707048}
 --- !u!1 &1828548613
 GameObject:
   m_ObjectHideFlags: 0
@@ -8976,7 +8946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 212.67862, y: -95.037056}
+  scrollPos: {x: 139.1391, y: -172.01302}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 244
@@ -8990,7 +8960,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 1927165804}
   selectedCommands:
-  - {fileID: 1927165856}
+  - {fileID: 1927165825}
   variables: []
   description: 
   stepPause: 0
@@ -11317,7 +11287,7 @@ MonoBehaviour:
   targetSceneName: Dream Scene
 --- !u!114 &1927165856
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -12204,6 +12174,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 742117765}
+  - {fileID: 1137777993}
+  - {fileID: 1826262148}
   - {fileID: 122913818}
   - {fileID: 1343273511}
   - {fileID: 1341848826}
