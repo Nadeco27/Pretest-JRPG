@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     private void HandleInput()
     {
         // Block input and reset vector if movement is not allowed
-        if (PlayerStateManager.isMovementAllowed == false)
+        if (PlayerStateManager.isMovementAllowed == false && InventoryManager.Instance.IsBackpackOpen())
         {
             movementInput = Vector2.zero;
             return;

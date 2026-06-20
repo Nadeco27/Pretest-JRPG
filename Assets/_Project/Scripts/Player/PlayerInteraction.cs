@@ -14,6 +14,8 @@ public class PlayerInteraction : MonoBehaviour
         // Listen for Space key and trigger interaction if an object is in range
         if (Input.GetKeyDown(KeyCode.Space) && currentInteractable != null)
         {
+            if (InventoryManager.Instance != null && InventoryManager.Instance.IsBackpackOpen()) return;
+
             currentInteractable.Interact();
         }
     }
