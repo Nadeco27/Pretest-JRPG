@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b56343e0658207747a7817470cf9b674, type: 3}
   m_Name: Obj_TalkToClara
   m_EditorClassIdentifier: Assembly-CSharp::ObjectiveData
-  objectiveId: TalkToClaraProgress
+  objectiveId: TalkClara
   description: Talk to Clara to progress the story
   emptyCheckboxSprite: {fileID: 21300000, guid: 1fddfcef85be85a4399dcc7c6b09968e, type: 3}
   checkedCheckboxSprite: {fileID: 21300000, guid: 313ca541d8bfdb443bc6e537fc26614b, type: 3}
