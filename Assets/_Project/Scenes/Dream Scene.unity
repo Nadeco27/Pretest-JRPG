@@ -2883,7 +2883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScreenTransitionManager
   transitionMaterial: {fileID: 2100000, guid: 42a3c3f436ee5454db7b930470991d73, type: 2}
   transitionDuration: 1.5
-  transitionCanvas: {fileID: 0}
+  transitionCanvas: {fileID: 1704952001}
 --- !u!4 &1232021831
 Transform:
   m_ObjectHideFlags: 0
