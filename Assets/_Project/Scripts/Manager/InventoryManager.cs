@@ -93,28 +93,41 @@ public class InventoryManager : MonoBehaviour
     // Public method called by the box trigger logic or drop tables
     public void AddItemToInventory(ItemData item, int amount)
     {
-        // Find if the item category already exists inside the structural list array
         InventoryItem existingItem = inventoryDatabase.Find(i => i.data == item);
 
         if (existingItem != null)
         {
-            // If it exists, remove it first to push it to the front of the list later
             inventoryDatabase.Remove(existingItem);
             existingItem.quantity += amount;
-            
-            // Insert at index 0 so newest item goes to the leftmost box
             inventoryDatabase.Insert(0, existingItem);
         }
         else
         {
-            // Brand new item entry tracking registration
             inventoryDatabase.Insert(0, new InventoryItem(item, amount));
         }
 
-        // If the backpack screen is currently active, redraw changes immediately
-        if (backpackUI.IsOpen())
+        if (backpackUI != null && backpackUI.IsOpen())
         {
             backpackUI.RefreshInventoryUI(inventoryDatabase);
+        }
+    }
+
+    public void ConsumeItem(ItemData itemToConsume)
+    {
+        InventoryItem existingItem = inventoryDatabase.Find(i => i.data == itemToConsume);
+
+        if (existingItem != null)
+        {
+            existingItem.quantity--;
+            if (existingItem.quantity <= 0)
+            {
+                inventoryDatabase.Remove(existingItem);
+            }
+
+            if (backpackUI != null && backpackUI.IsOpen())
+            {
+                backpackUI.RefreshInventoryUI(inventoryDatabase);
+            }
         }
     }
 

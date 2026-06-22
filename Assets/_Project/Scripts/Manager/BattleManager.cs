@@ -53,7 +53,18 @@ public class BattleManager : MonoBehaviour
     public void PlayerTurn()
     {
         state = BattleState.PLAYERTURN;
-        
+
+        // Reset player shield when its player turn
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            BattleUnit playerUnit = playerObj.GetComponent<BattleUnit>();
+            if (playerUnit != null && playerUnit.isDefending)
+            {
+                playerUnit.SetDefend(false);
+            }
+        }
+
         if (diamondActionMenuParent != null)
         {
             diamondActionMenuParent.SetActive(true);

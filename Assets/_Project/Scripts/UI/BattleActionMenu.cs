@@ -11,20 +11,20 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
     [System.Serializable]
     public class ActionCategory
     {
-        public string categoryName; // "Attack", "Skill", atau "Item"
-        public Button mainButton;
-        public CanvasGroup subMenuCanvasGroup;
+        public string categoryName; // "Attack", "Skill", or "Item"
+        public Button mainButton;   
+        public CanvasGroup subMenuCanvasGroup; 
     }
 
     [Header("Menu Configuration")]
     [SerializeField] private List<ActionCategory> categories = new List<ActionCategory>();
-    [SerializeField] private Button defendButton;
 
     [Header("Animation Settings")]
     [SerializeField] private float fadeDuration = 0.3f;
     [SerializeField] private float doubleClickThreshold = 0.3f;
 
     private CanvasGroup activeSubMenu;
+    private BattleUnit playerUnit; 
     private float lastClickTime = 0f;
     private string lastClickedAction = "";
 
@@ -36,6 +36,12 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            playerUnit = playerObj.GetComponent<BattleUnit>();
+        }
+
         foreach (var category in categories)
         {
             if (category.subMenuCanvasGroup != null)
@@ -45,22 +51,14 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
                 category.subMenuCanvasGroup.blocksRaycasts = false;
             }
 
-            // Assign click function to main action menu
             ActionCategory localCategory = category;
             if (localCategory.mainButton != null)
             {
                 localCategory.mainButton.onClick.AddListener(() => OnMainCategoryClicked(localCategory));
             }
         }
-
-        // Assign click function to defend action
-        if (defendButton != null)
-        {
-            defendButton.onClick.AddListener(OnDefendClicked);
-        }
     }
 
-    // Detect right click to close menu
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
@@ -73,13 +71,17 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
     {
         if (BattleManager.Instance == null || BattleManager.Instance.state != BattleState.PLAYERTURN) return;
 
-        // If any sub menu opened, close that submenu
+        // Populate items dynamically before opening
+        if (category.categoryName == "Item")
+        {
+            RefreshItemSubMenu(category.subMenuCanvasGroup.transform);
+        }
+
         if (activeSubMenu != null && activeSubMenu != category.subMenuCanvasGroup)
         {
             SafeFade(activeSubMenu, 0f, false);
         }
 
-        // Open new sub menu
         activeSubMenu = category.subMenuCanvasGroup;
         if (activeSubMenu != null)
         {
@@ -87,49 +89,88 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void ReceiveActionClick(string actionName, string categoryName)
+    private void RefreshItemSubMenu(Transform container)
+    {
+        if (InventoryManager.Instance == null) return;
+
+        var inventoryList = InventoryManager.Instance.GetInventoryList();
+        BattleActionSlot[] slots = container.GetComponentsInChildren<BattleActionSlot>(true);
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (i < inventoryList.Count)
+            {
+                slots[i].gameObject.SetActive(true);
+                slots[i].SetupAsItem(inventoryList[i]);
+            }
+            else
+            {
+                slots[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void ReceiveActionClick(BattleActionSlot slot)
     {
         if (BattleManager.Instance == null || BattleManager.Instance.state != BattleState.PLAYERTURN) return;
 
         float timeSinceLastClick = Time.time - lastClickTime;
 
-        // Check double click
-        if (timeSinceLastClick <= doubleClickThreshold && lastClickedAction == actionName)
+        if (timeSinceLastClick <= doubleClickThreshold && lastClickedAction == slot.actionName)
         {
-            ExecuteAction(actionName, categoryName);
+            ExecuteAction(slot);
         }
         else
         {
             lastClickTime = Time.time;
-            lastClickedAction = actionName;
-            Debug.Log($"[Action Menu] Single click detected on: {actionName}. Click again to execute.");
+            lastClickedAction = slot.actionName;
+            Debug.Log($"[Action Menu] Single click detected on: {slot.actionName}. Click again to execute.");
         }
     }
 
-    private void OnDefendClicked()
+    private void ExecuteAction(BattleActionSlot slot)
     {
-        ReceiveActionClick("Defend", "Defend");
-    }
+        Debug.Log($"[BATTLE EXECUTION] Executing: {slot.actionName} (Category: {slot.categoryName})");
 
-    private void ExecuteAction(string actionName, string categoryName)
-    {
-        Debug.Log($"[BATTLE EXECUTION] SUCCESS DOUBLE CLICK! Action: {actionName} (Cetegory: {categoryName})");
+        if (playerUnit != null)
+        {
+            // Consume stat costs
+            playerUnit.ConsumeCost(slot.costType, slot.costAmount);
 
+            // Evaluate specific category behaviors
+            if (slot.categoryName == "Defend")
+            {
+                playerUnit.SetDefend(true);
+            }
+            else if (slot.categoryName == "Item" && slot.linkedItem != null)
+            {
+                ItemData item = slot.linkedItem;
+
+                playerUnit.UseItem(item);
+
+                // Consume from inventory
+                if (InventoryManager.Instance != null) InventoryManager.Instance.ConsumeItem(item);
+
+                // Refresh Item Menu immediately if it's still open
+                RefreshItemSubMenu(activeSubMenu.transform);
+
+                return; 
+            }
+        }
+
+        // Close UI and pass turn for non-item actions
         CloseCurrentSubMenu();
 
-        // Action economy
-        if (categoryName == "Item")
+        if (slot.categoryName != "Item")
         {
-            Debug.Log("[Action Menu] Using item doesn't exhaust turn");
-            return; 
+            EndPlayerTurnSequence();
         }
-
-        EndPlayerTurnSequence();
     }
 
     private void EndPlayerTurnSequence()
     {
-        gameObject.SetActive(false);
+        Debug.Log("[Action Menu] Turn completed. Passing authority to ENEMYTURN state...");
+        gameObject.SetActive(false); 
 
         if (BattleManager.Instance != null)
         {

@@ -14,10 +14,14 @@ public class DynamicTooltip : MonoBehaviour
     [Header("Layout Reference")]
     [SerializeField] private RectTransform rectTransform;
 
+    private Canvas parentCanvas;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        parentCanvas = GetComponentInParent<Canvas>();
 
         HideTooltip();
     }
@@ -38,8 +42,7 @@ public class DynamicTooltip : MonoBehaviour
         titleText.text = title;
         costText.text = cost;
         descriptionText.text = description;
-        
-        // Force Unity layout engine to recalculate size immediately based on text length
+
         LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
         
         UpdatePosition();
@@ -58,11 +61,26 @@ public class DynamicTooltip : MonoBehaviour
         float normalizedX = mousePos.x / Screen.width;
         float normalizedY = mousePos.y / Screen.height;
 
-        // Smart pivot calculation so tooltip can appear in right or left side of cursor
+        // Smart Pivot Calculation
         float pivotX = normalizedX > 0.5f ? 1.05f : -0.05f;
         float pivotY = normalizedY > 0.5f ? 1.05f : -0.05f;
 
         rectTransform.pivot = new Vector2(pivotX, pivotY);
-        rectTransform.position = mousePos;
+
+        if (parentCanvas != null && parentCanvas.renderMode == RenderMode.ScreenSpaceCamera)
+        {
+            // Convert pixel screen position to local canvas position using the render camera
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                parentCanvas.transform as RectTransform, 
+                mousePos, 
+                parentCanvas.worldCamera, 
+                out Vector2 localPoint);
+
+            rectTransform.localPosition = localPoint;
+        }
+        else
+        {
+            rectTransform.position = mousePos;
+        }
     }
 }
