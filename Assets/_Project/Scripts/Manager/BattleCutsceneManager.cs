@@ -55,7 +55,7 @@ public class BattleCutsceneManager : MonoBehaviour
         if (BattleManager.Instance != null)
         {
             previousState = BattleManager.Instance.state;
-            BattleManager.Instance.SetBattleState(BattleState.BUSY_CUTSCENE);
+            BattleManager.Instance.ChangeState(BattleState.BUSY_CUTSCENE);
         }
 
         // Execute the specific narrative flowchart block
@@ -74,7 +74,7 @@ public class BattleCutsceneManager : MonoBehaviour
         // Resume state balance
         if (BattleManager.Instance != null)
         {
-            BattleManager.Instance.SetBattleState(previousState);
+            BattleManager.Instance.ChangeState(previousState);
         }
     }
 }

@@ -56,10 +56,9 @@ public class BattleUnit : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        // Damage mitigation logic (50% reduction from Defend Stance)
+        // Damage mitigation logic (50% reduction from defend)
         if (isDefending)
         {
-            int originalDamage = damage;
             damage = Mathf.CeilToInt(damage * 0.5f);
         }
 
@@ -186,6 +185,15 @@ public class BattleUnit : MonoBehaviour
         if (isDefending)
         {
             SetDefend(false);
+        }
+
+        // Give 1 Mana for every turn if not full
+        if (currentMP < maxMP)
+        {
+            currentMP++;
+
+            if (unitHUD != null) unitHUD.TriggerStatHighlight("MP");
+            UpdateVisualHUD();
         }
 
         // Process expiring buffs

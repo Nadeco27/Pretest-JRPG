@@ -26,6 +26,7 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
     private CanvasGroup activeSubMenu;
     private CanvasGroup mainCanvasGroup;
     private BattleUnit playerUnit; 
+    private bool isExecutingAction = false;
     private float lastClickTime = 0f;
     private string lastClickedAction = "";
 
@@ -139,6 +140,7 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
 
     public void ReceiveActionClick(BattleActionSlot slot)
     {
+        if (isExecutingAction) return;
         if (BattleManager.Instance == null || BattleManager.Instance.state != BattleState.PLAYERTURN) return;
 
         float timeSinceLastClick = Time.time - lastClickTime;
@@ -170,6 +172,10 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
     private void ExecuteAction(BattleActionSlot slot)
     {
         if (playerUnit == null) return;
+
+        lastClickedAction = "";
+        lastClickTime = 0f;
+        isExecutingAction = true;
 
         // Consume any required attribute resource costs before starting
         playerUnit.ConsumeCost(slot.costType, slot.costAmount);
@@ -250,6 +256,19 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
             {
                 RefreshItemSubMenu(slot.transform.parent);
             }
+
+            StartCoroutine(ItemCooldownRoutine());
+        }
+    }
+
+    public void ShowMenuUI()
+    {
+        isExecutingAction = false;
+        if (mainCanvasGroup != null)
+        {
+            mainCanvasGroup.alpha = 1f;
+            mainCanvasGroup.interactable = true;
+            mainCanvasGroup.blocksRaycasts = true;
         }
     }
 
@@ -272,11 +291,14 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
     private void EndPlayerTurnSequence()
     {
         Debug.Log("[Action Menu] Turn completed. Passing authority to ENEMYTURN state...");
-        gameObject.SetActive(false); 
+        if (BattleManager.Instance != null)
+        {
+            BattleManager.Instance.ChangeState(BattleState.ENEMYTURN);
+        }
 
         if (BattleManager.Instance != null)
         {
-            BattleManager.Instance.SetBattleState(BattleState.ENEMYTURN);
+            BattleManager.Instance.ChangeState(BattleState.ENEMYTURN);
         }
     }
 
@@ -318,5 +340,12 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
             cg.interactable = true;
             cg.blocksRaycasts = true;
         }
+    }
+
+    private IEnumerator ItemCooldownRoutine()
+    {
+        // 0.5 second buffer to prevent click spam in Item
+        yield return new WaitForSeconds(0.5f);
+        isExecutingAction = false;
     }
 }
