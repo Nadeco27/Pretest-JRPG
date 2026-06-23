@@ -1,7 +1,16 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class BattleUnit : MonoBehaviour
 {
+    // List of temporary buff active
+    [System.Serializable]
+    public class ActiveBuff
+    {
+        public int strAmount, defAmount, intAmount, resAmount;
+        public int turnsRemaining;
+    }
+
     [Header("Unit Information")]
     [Tooltip("The name of the unit displayed in UI.")]
     public string unitName;
@@ -36,6 +45,8 @@ public class BattleUnit : MonoBehaviour
     [Header("Defend System")]
     public bool isDefending = false;
     [SerializeField] private GameObject shieldVFXObject;
+
+    private List<ActiveBuff> activeBuffs = new List<ActiveBuff>();
 
     private void Start()
     {
@@ -140,10 +151,73 @@ public class BattleUnit : MonoBehaviour
             resistance += item.buffRES;
             if (unitHUD != null) unitHUD.TriggerStatHighlight("RES");
         }
+        
+        // Register temporary stat buffs
+        bool hasBuff = item.buffSTR > 0 || item.buffDEF > 0 || item.buffINT > 0 || item.buffRES > 0;
+        if (hasBuff)
+        {
+            // Create a memory record of what stats are being added
+            ActiveBuff newBuff = new ActiveBuff
+            {
+                strAmount = item.buffSTR,
+                defAmount = item.buffDEF,
+                intAmount = item.buffINT,
+                resAmount = item.buffRES,
+                turnsRemaining = 1 // Set duration to 1 round
+            };
+            activeBuffs.Add(newBuff);
+
+            // Apply immediately to current stats
+            if (item.buffSTR > 0) { strength += item.buffSTR; if (unitHUD != null) unitHUD.TriggerStatHighlight("STR"); }
+            if (item.buffDEF > 0) { defense += item.buffDEF; if (unitHUD != null) unitHUD.TriggerStatHighlight("DEF"); }
+            if (item.buffINT > 0) { intelligence += item.buffINT; if (unitHUD != null) unitHUD.TriggerStatHighlight("INT"); }
+            if (item.buffRES > 0) { resistance += item.buffRES; if (unitHUD != null) unitHUD.TriggerStatHighlight("RES"); }
+        }
 
         // Force UI numbers to update
         UpdateVisualHUD();
         Debug.Log($"[{unitName}] Used {item.itemName}. Stats updated!");
+    }
+
+    // Called automatically by BattleManager at the start of this unit's turn
+    public void ProcessTurnStart()
+    {
+        // Reset defend stance from previous turn
+        if (isDefending)
+        {
+            SetDefend(false);
+        }
+
+        // Process expiring buffs
+        bool statsChanged = false;
+
+        // Loop backwards to allow removal of items from the list during the loop
+        for (int i = activeBuffs.Count - 1; i >= 0; i--)
+        {
+            activeBuffs[i].turnsRemaining--;
+            
+            // If the buff duration has run out
+            if (activeBuffs[i].turnsRemaining <= 0)
+            {
+                // Revert the stats by subtracting the memorized amounts
+                strength -= activeBuffs[i].strAmount;
+                defense -= activeBuffs[i].defAmount;
+                intelligence -= activeBuffs[i].intAmount;
+                resistance -= activeBuffs[i].resAmount;
+
+                // Remove the expired buff from memory
+                activeBuffs.RemoveAt(i);
+                statsChanged = true;
+                
+                Debug.Log($"[{unitName}] A temporary buff has worn off.");
+            }
+        }
+
+        // Refresh UI only if a buff actually expired
+        if (statsChanged)
+        {
+            UpdateVisualHUD();
+        }
     }
 
     private void Die()

@@ -24,6 +24,7 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
     [SerializeField] private float doubleClickThreshold = 0.3f;
 
     private CanvasGroup activeSubMenu;
+    private CanvasGroup mainCanvasGroup;
     private BattleUnit playerUnit; 
     private float lastClickTime = 0f;
     private string lastClickedAction = "";
@@ -32,6 +33,22 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        mainCanvasGroup = GetComponent<CanvasGroup>();
+        if (mainCanvasGroup == null)
+        {
+            mainCanvasGroup = gameObject.AddComponent<CanvasGroup>();
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (mainCanvasGroup != null)
+        {
+            mainCanvasGroup.alpha = 1f;
+            mainCanvasGroup.interactable = true;
+            mainCanvasGroup.blocksRaycasts = true;
+        }
     }
 
     private void Start()
@@ -74,6 +91,16 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
         // Populate items dynamically before opening
         if (category.categoryName == "Item")
         {
+            // If no item in inventory, then display warning text UI
+            if (InventoryManager.Instance == null || InventoryManager.Instance.GetInventoryList().Count == 0)
+            {
+                if (WarningMessageUI.Instance != null)
+                {
+                    WarningMessageUI.Instance.ShowWarning("You doesn't have any item");
+                }
+                return;
+            }
+
             RefreshItemSubMenu(category.subMenuCanvasGroup.transform);
         }
 
@@ -128,43 +155,118 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    private Transform GetEnemyTransform()
+    {
+        GameObject enemyObj = GameObject.FindGameObjectWithTag("Enemy");
+        return enemyObj != null ? enemyObj.transform : null;
+    }
+
+    private BattleUnit GetEnemyUnit()
+    {
+        GameObject enemyObj = GameObject.FindGameObjectWithTag("Enemy");
+        return enemyObj != null ? enemyObj.GetComponent<BattleUnit>() : null;
+    }
+
     private void ExecuteAction(BattleActionSlot slot)
     {
-        Debug.Log($"[BATTLE EXECUTION] Executing: {slot.actionName} (Category: {slot.categoryName})");
+        if (playerUnit == null) return;
 
-        if (playerUnit != null)
+        // Consume any required attribute resource costs before starting
+        playerUnit.ConsumeCost(slot.costType, slot.costAmount);
+
+        UnitAnimator playerAnimator = playerUnit.GetComponent<UnitAnimator>();
+        Transform enemyTransform = GetEnemyTransform();
+        BattleUnit enemyUnit = GetEnemyUnit();
+
+        // Evaluate specific category behaviors
+        if (slot.categoryName == "Attack")
         {
-            // Consume stat costs
-            playerUnit.ConsumeCost(slot.costType, slot.costAmount);
+            HideMenuUI();
+            CloseCurrentSubMenu();
 
-            // Evaluate specific category behaviors
-            if (slot.categoryName == "Defend")
+            if (playerAnimator != null && enemyTransform != null)
             {
-                playerUnit.SetDefend(true);
+                int damage = Mathf.Max(1, playerUnit.strength - (enemyUnit != null ? enemyUnit.defense : 0));
+                
+                StartCoroutine(playerAnimator.MeleeAttackRoutine(enemyTransform, () => 
+                {
+                    if (enemyUnit != null) enemyUnit.TakeDamage(damage);
+                }));
+
+                StartCoroutine(WaitAndEndTurn(1.5f)); 
             }
-            else if (slot.categoryName == "Item" && slot.linkedItem != null)
+            else EndPlayerTurnSequence();
+        }
+        else if (slot.categoryName == "Skill")
+        {
+            HideMenuUI();
+            CloseCurrentSubMenu();
+
+            if (playerAnimator != null && enemyTransform != null)
             {
-                ItemData item = slot.linkedItem;
+                int damage = Mathf.Max(1, playerUnit.intelligence - (enemyUnit != null ? enemyUnit.resistance : 0));
+                GameObject fireballPrefab = Resources.Load<GameObject>("Fireball"); 
+                
+                if (fireballPrefab != null)
+                {
+                    StartCoroutine(playerAnimator.RangedAttackRoutine(enemyTransform, fireballPrefab, () => 
+                    {
+                        if (enemyUnit != null) enemyUnit.TakeDamage(damage);
+                    }));
 
-                playerUnit.UseItem(item);
+                    StartCoroutine(WaitAndEndTurn(1.5f));
+                }
+                else
+                {
+                    Debug.LogError("[Action Menu] Prefab 'Fireball' not found");
+                    EndPlayerTurnSequence();
+                }
+            }
+            else EndPlayerTurnSequence();
+        }
+        else if (slot.categoryName == "Defend")
+        {
+            HideMenuUI();
+            CloseCurrentSubMenu();
 
-                // Consume from inventory
-                if (InventoryManager.Instance != null) InventoryManager.Instance.ConsumeItem(item);
+            playerUnit.SetDefend(true);
+            EndPlayerTurnSequence(); 
+        }
+        else if (slot.categoryName == "Item" && slot.linkedItem != null)
+        {
+            ItemData item = slot.linkedItem;
+            
+            // Apply healing or temporary attribute buffs 
+            playerUnit.UseItem(item);
 
-                // Refresh Item Menu immediately if it's still open
+            if (InventoryManager.Instance != null) InventoryManager.Instance.ConsumeItem(item);
+
+            // Update UI list slots elements
+            if (activeSubMenu != null)
+            {
                 RefreshItemSubMenu(activeSubMenu.transform);
-
-                return; 
+            }
+            else 
+            {
+                RefreshItemSubMenu(slot.transform.parent);
             }
         }
+    }
 
-        // Close UI and pass turn for non-item actions
-        CloseCurrentSubMenu();
-
-        if (slot.categoryName != "Item")
+    private void HideMenuUI()
+    {
+        if (mainCanvasGroup != null)
         {
-            EndPlayerTurnSequence();
+            mainCanvasGroup.alpha = 0f;
+            mainCanvasGroup.interactable = false;
+            mainCanvasGroup.blocksRaycasts = false;
         }
+    }
+
+    private IEnumerator WaitAndEndTurn(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        EndPlayerTurnSequence();
     }
 
     private void EndPlayerTurnSequence()

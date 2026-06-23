@@ -86,9 +86,11 @@ public class BattleActionSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         if (!HasEnoughStats())
         {
-            Debug.LogWarning($"[Action Slot] Insufficient {costType} to execute {actionName}!");
-            if (WarningMessageUI.Instance != null) WarningMessageUI.Instance.ShowWarning($"Not enough {costType} to use {actionName}!");
-            return; 
+            if (WarningMessageUI.Instance != null)
+            {
+                WarningMessageUI.Instance.ShowWarning("Cannot afford cost of action");
+            }
+            return;
         }
         
         if (BattleActionMenu.Instance != null) BattleActionMenu.Instance.ReceiveActionClick(this);

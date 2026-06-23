@@ -15,3 +15,9 @@ MonoBehaviour:
   itemName: Purple Potion
   itemDescription: Gain 1 INT for 1 turn.
   itemIcon: {fileID: -2063460437, guid: 15cbac57961cb2f449d1acb7a97ee8c5, type: 3}
+  healHP: 0
+  restoreMP: 0
+  buffSTR: 0
+  buffDEF: 0
+  buffINT: 1
+  buffRES: 0

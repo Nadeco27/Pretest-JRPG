@@ -15,3 +15,9 @@ MonoBehaviour:
   itemName: Red Potion
   itemDescription: Heal 3 HP
   itemIcon: {fileID: -439307089, guid: 1d112bfd37b4958439cd7ae6aac3b269, type: 3}
+  healHP: 3
+  restoreMP: 0
+  buffSTR: 0
+  buffDEF: 0
+  buffINT: 0
+  buffRES: 0
