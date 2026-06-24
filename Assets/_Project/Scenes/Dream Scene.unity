@@ -212,7 +212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &46942069
 RectTransform:
   m_ObjectHideFlags: 0
@@ -863,6 +863,7 @@ GameObject:
   - component: {fileID: 340280958}
   - component: {fileID: 340280957}
   - component: {fileID: 340280956}
+  - component: {fileID: 340280965}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1112,6 +1113,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &340280965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340280955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703f0391da655514087bcf3586022d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPositionRestorer
 --- !u!1 &358698372
 GameObject:
   m_ObjectHideFlags: 0
@@ -3895,8 +3908,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.11, y: 0}
-  m_Radius: 0.31
+  m_Offset: {x: -0.11, y: 0.26}
+  m_Radius: 0.47
 --- !u!95 &1722728101
 Animator:
   serializedVersion: 7
@@ -3987,7 +4000,7 @@ Transform:
   m_GameObject: {fileID: 1722728099}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.243, y: -0.025900006, z: 0}
+  m_LocalPosition: {x: 5.243, y: -0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4006,6 +4019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54737d7e546651d4ab2c387f5f025fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyEncounter
+  encounterID: Dream_Enemy_1
   battleSceneName: Battle Scene
   exclamationMark: {fileID: 1244156662}
   animationDuration: 0.4
@@ -4839,6 +4853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e09df53bddcfdb4eb4dbe1912f0837a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FungusDialogTrigger
+  uniqueTriggerID: Dream_Dialogue_1
   targetFlowchart: {fileID: 875353764}
   targetBlockName: BloodDialogue
   triggerOnlyOnce: 1

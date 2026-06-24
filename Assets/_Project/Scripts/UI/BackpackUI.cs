@@ -97,6 +97,8 @@ public class BackpackUI : MonoBehaviour
 
     public void ShowBackpack(List<InventoryItem> items)
     {
+        if (GetComponent<CanvasGroup>() == null) return;
+        
         isOpen = true;
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;

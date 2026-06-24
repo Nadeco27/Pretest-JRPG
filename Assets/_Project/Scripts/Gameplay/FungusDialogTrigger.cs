@@ -1,13 +1,18 @@
 using UnityEngine;
 using Fungus;
 
+[RequireComponent(typeof(Collider2D))]
 public class FungusDialogTrigger : MonoBehaviour
 {
+    [Header("Persistent Data")]
+    [Tooltip("Unique ID for each dialogue trigger")]
+    [SerializeField] private string uniqueTriggerID = "Dialog_Default_1";
+
     [Header("Fungus Settings")]
     [Tooltip("Insert Fungus dialogue flowchart here")]
     [SerializeField] private Flowchart targetFlowchart;
 
-    [Tooltip("Block name in flowchat that will be triggered")]
+    [Tooltip("Block name in flowchart that will be triggered")]
     [SerializeField] private string targetBlockName;
 
     [Header("Trigger Settings")]
@@ -18,6 +23,17 @@ public class FungusDialogTrigger : MonoBehaviour
     [SerializeField] private string playerTag = "Player";
 
     private bool hasTriggered = false;
+
+    private void Start()
+    {
+        // Check if triggerID already triggered
+        if (triggerOnlyOnce && PlayerPrefs.GetInt("FungusTrigger_" + uniqueTriggerID, 0) == 1)
+        {
+            hasTriggered = true;
+            Collider2D col = GetComponent<Collider2D>();
+            if (col != null) col.enabled = false;
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -30,6 +46,10 @@ public class FungusDialogTrigger : MonoBehaviour
                 if (triggerOnlyOnce)
                 {
                     hasTriggered = true;
+                    
+                    // Save to memory that this dialogue is triggered
+                    PlayerPrefs.SetInt("FungusTrigger_" + uniqueTriggerID, 1);
+                    PlayerPrefs.Save();
 
                     Collider2D col = GetComponent<Collider2D>();
                     if (col != null) col.enabled = false;
@@ -37,8 +57,8 @@ public class FungusDialogTrigger : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("FungusDialogTrigger: Flowchart atau Target Block Namenot filled " + 
-                    gameObject.name);
+                Debug.LogWarning("FungusDialogTrigger: Flowchart or Target Block Name not filled on "
+                    + gameObject.name);
             }
         }
     }

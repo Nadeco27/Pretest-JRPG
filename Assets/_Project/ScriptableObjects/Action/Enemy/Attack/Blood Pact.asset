@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2af7473cd05dc43b4734607a5dbb69, type: 3}
+  m_Name: Blood Pact
+  m_EditorClassIdentifier: Assembly-CSharp::ActionData
+  actionName: Blood Pact
+  description: Deal <b>STR+1</b> damage to enemy and gain 1 Mana with the cost of
+    1 Health
+  costType: 1
+  costAmount: 1
+  animationType: 0
+  projectilePrefab: {fileID: 0}
+  scalingStat: 0
+  flatDamageBonus: 1
+  selfHealAmount: 0
+  selfManaRestoreAmount: 1
+  strBuffBonus: 0
+  defBuffBonus: 0
+  intBuffBonus: 0
+  resBuffBonus: 0
+  actionBuffDuration: 1

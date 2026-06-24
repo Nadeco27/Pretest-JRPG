@@ -15,9 +15,9 @@ MonoBehaviour:
   itemName: Green Potion
   itemDescription: Gain 1 DEF for 1 turn.
   itemIcon: {fileID: 489929269, guid: a013d90aa3625684d9d43a23ebfad0ef, type: 3}
-  healHP: 0
-  restoreMP: 0
-  buffSTR: 0
-  buffDEF: 1
-  buffINT: 0
-  buffRES: 0
+  healAmount: 0
+  manaRestoreAmount: 0
+  strBonus: 0
+  defBonus: 1
+  intBonus: 0
+  resBonus: 0

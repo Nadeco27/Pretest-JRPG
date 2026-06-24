@@ -7,14 +7,13 @@ public class BattleUnit : MonoBehaviour
     [System.Serializable]
     public class ActiveBuff
     {
+        public string buffName; 
         public int strAmount, defAmount, intAmount, resAmount;
         public int turnsRemaining;
     }
 
     [Header("Unit Information")]
-    [Tooltip("The name of the unit displayed in UI.")]
     public string unitName;
-    [Tooltip("Check if this unit is controlled by the player.")]
     public bool isPlayerUnit;
 
     [Header("Health Points (HP)")]
@@ -25,33 +24,64 @@ public class BattleUnit : MonoBehaviour
     public int maxMP;
     public int currentMP;
 
-    [Header("Unit Attributes")]
-    [Tooltip("Strength: Affects physical attack damage.")]
+    // Seperate base stat with culculated bonus stat
+    [Header("Base Attributes")]
+    [Tooltip("Character base stat, value not gonna be changed in game")]
+    public int baseStrength;
+    public int baseDefense;
+    public int baseIntelligence;
+    public int baseResistance;
+
+    [Header("Current Attributes (Calculated)")]
+    [Tooltip("Fill with same number as base stat, this stat will be changed on game with buffs")]
     public int strength;
-    
-    [Tooltip("Defense: Affects damage suffered from physical attacks.")]
     public int defense;
-    
-    [Tooltip("Intelligence: Affects magic attack damage.")]
     public int intelligence;
-    
-    [Tooltip("Resistance: Affects damage suffered from magic attacks.")]
     public int resistance;
 
     [Header("Visual UI Connection")]
-    [Tooltip("Assign the corresponding HUD script for this unit.")]
     [SerializeField] private BattleHUD unitHUD;
 
     [Header("Defend System")]
     public bool isDefending = false;
+
     [SerializeField] private GameObject shieldVFXObject;
 
     private List<ActiveBuff> activeBuffs = new List<ActiveBuff>();
+
+    private void Awake()
+    {
+        baseStrength = strength;
+        baseDefense = defense;
+        baseIntelligence = intelligence;
+        baseResistance = resistance;
+        
+        RecalculateStats();
+    }
 
     private void Start()
     {
         UpdateVisualHUD();
         if (shieldVFXObject != null) shieldVFXObject.SetActive(false); 
+    }
+
+    public void RecalculateStats()
+    {
+        strength = baseStrength;
+        defense = baseDefense;
+        intelligence = baseIntelligence;
+        resistance = baseResistance;
+
+        // Add every buff in active buffs list
+        foreach (var buff in activeBuffs)
+        {
+            strength += buff.strAmount;
+            defense += buff.defAmount;
+            intelligence += buff.intAmount;
+            resistance += buff.resAmount;
+        }
+
+        UpdateVisualHUD();
     }
 
     public void TakeDamage(int damage)
@@ -76,7 +106,21 @@ public class BattleUnit : MonoBehaviour
 
         if (currentHP <= 0)
         {
-            Die();
+            if (BattleManager.Instance != null)
+            {
+                if (isPlayerUnit)
+                {
+                    BattleManager.Instance.ChangeState(BattleState.LOST);
+                }
+                else
+                {
+                    BattleManager.Instance.ChangeState(BattleState.WON);
+                }
+            }
+            else
+            {
+                Die();
+            }
         }
     }
 
@@ -115,114 +159,155 @@ public class BattleUnit : MonoBehaviour
 
     public void UseItem(ItemData item)
     {
-        // Heal Health
-        if (item.healHP > 0)
+        bool hasHUDChanged = false;
+
+        // Healing and Mana regen logic
+        if (item.healAmount > 0)
         {
-            currentHP = Mathf.Clamp(currentHP + item.healHP, 0, maxHP);
+            currentHP = Mathf.Min(currentHP + item.healAmount, maxHP);
             if (unitHUD != null) unitHUD.TriggerStatHighlight("HP");
-        }
-        
-        // Restore Mana
-        if (item.restoreMP > 0)
-        {
-            currentMP = Mathf.Clamp(currentMP + item.restoreMP, 0, maxMP);
-            if (unitHUD != null) unitHUD.TriggerStatHighlight("MP");
+            Debug.Log($"[{unitName}] Restored {item.healAmount} HP.");
+            hasHUDChanged = true;
         }
 
-        // Stat Buffs
-        if (item.buffSTR > 0)
+        if (item.manaRestoreAmount > 0)
         {
-            strength += item.buffSTR;
-            if (unitHUD != null) unitHUD.TriggerStatHighlight("STR");
+            currentMP = Mathf.Min(currentMP + item.manaRestoreAmount, maxMP);
+            if (unitHUD != null) unitHUD.TriggerStatHighlight("MP");
+            Debug.Log($"[{unitName}] Restored {item.manaRestoreAmount} MP.");
+            hasHUDChanged = true;
         }
-        if (item.buffDEF > 0)
+
+        // Temporary buff logic
+        bool isBuffItem = item.strBonus > 0 || item.defBonus > 0 || item.intBonus > 0 || item.resBonus > 0;
+
+        if (isBuffItem)
         {
-            defense += item.buffDEF;
-            if (unitHUD != null) unitHUD.TriggerStatHighlight("DEF");
-        }
-        if (item.buffINT > 0)
-        {
-            intelligence += item.buffINT;
-            if (unitHUD != null) unitHUD.TriggerStatHighlight("INT");
-        }
-        if (item.buffRES > 0)
-        {
-            resistance += item.buffRES;
-            if (unitHUD != null) unitHUD.TriggerStatHighlight("RES");
-        }
-        
-        // Register temporary stat buffs
-        bool hasBuff = item.buffSTR > 0 || item.buffDEF > 0 || item.buffINT > 0 || item.buffRES > 0;
-        if (hasBuff)
-        {
-            // Create a memory record of what stats are being added
             ActiveBuff newBuff = new ActiveBuff
             {
-                strAmount = item.buffSTR,
-                defAmount = item.buffDEF,
-                intAmount = item.buffINT,
-                resAmount = item.buffRES,
-                turnsRemaining = 1 // Set duration to 1 round
+                buffName = item.itemName,
+                strAmount = item.strBonus,
+                defAmount = item.defBonus,
+                intAmount = item.intBonus,
+                resAmount = item.resBonus,
+                turnsRemaining = item.buffDuration 
             };
-            activeBuffs.Add(newBuff);
 
-            // Apply immediately to current stats
-            if (item.buffSTR > 0) { strength += item.buffSTR; if (unitHUD != null) unitHUD.TriggerStatHighlight("STR"); }
-            if (item.buffDEF > 0) { defense += item.buffDEF; if (unitHUD != null) unitHUD.TriggerStatHighlight("DEF"); }
-            if (item.buffINT > 0) { intelligence += item.buffINT; if (unitHUD != null) unitHUD.TriggerStatHighlight("INT"); }
-            if (item.buffRES > 0) { resistance += item.buffRES; if (unitHUD != null) unitHUD.TriggerStatHighlight("RES"); }
+            activeBuffs.Add(newBuff);
+            RecalculateStats();
+
+            // Trigger visual highlights for stats
+            if (unitHUD != null)
+            {
+                if (item.strBonus > 0) unitHUD.TriggerStatHighlight("STR");
+                if (item.defBonus > 0) unitHUD.TriggerStatHighlight("DEF");
+                if (item.intBonus > 0) unitHUD.TriggerStatHighlight("INT");
+                if (item.resBonus > 0) unitHUD.TriggerStatHighlight("RES");
+            }
+            
+            Debug.Log($"[{unitName}] Applied buff from {item.itemName} for {item.buffDuration} rounds.");
+            hasHUDChanged = false;
         }
 
-        // Force UI numbers to update
-        UpdateVisualHUD();
-        Debug.Log($"[{unitName}] Used {item.itemName}. Stats updated!");
+        if (hasHUDChanged)
+        {
+            UpdateVisualHUD();
+        }
     }
 
     // Called automatically by BattleManager at the start of this unit's turn
     public void ProcessTurnStart()
     {
-        // Reset defend stance from previous turn
+        // Reset defend stance
         if (isDefending)
         {
             SetDefend(false);
         }
 
-        // Give 1 Mana for every turn if not full
+        // Regen 1 Mana every turn
         if (currentMP < maxMP)
         {
             currentMP++;
-
             if (unitHUD != null) unitHUD.TriggerStatHighlight("MP");
             UpdateVisualHUD();
         }
 
-        // Process expiring buffs
         bool statsChanged = false;
 
-        // Loop backwards to allow removal of items from the list during the loop
+        // Reverse loop to remove item buff from list
         for (int i = activeBuffs.Count - 1; i >= 0; i--)
         {
             activeBuffs[i].turnsRemaining--;
-            
-            // If the buff duration has run out
             if (activeBuffs[i].turnsRemaining <= 0)
             {
-                // Revert the stats by subtracting the memorized amounts
-                strength -= activeBuffs[i].strAmount;
-                defense -= activeBuffs[i].defAmount;
-                intelligence -= activeBuffs[i].intAmount;
-                resistance -= activeBuffs[i].resAmount;
-
-                // Remove the expired buff from memory
+                Debug.Log($"[{unitName}] Buff {activeBuffs[i].buffName} has worn off.");
                 activeBuffs.RemoveAt(i);
                 statsChanged = true;
-                
-                Debug.Log($"[{unitName}] A temporary buff has worn off.");
             }
         }
 
-        // Refresh UI only if a buff actually expired
+        // If any buff runs out, recalculate stats
         if (statsChanged)
+        {
+            RecalculateStats();
+        }
+    }
+
+    public void ExecuteActionEffects(ActionData action, BattleUnit targetUnit)
+    {
+        // Consume health or mana cost in this action
+        ConsumeCost(action.costType, action.costAmount);
+
+        // Calculate damage
+        int baseStat = action.scalingStat == StatScaling.STR ? strength : intelligence;
+        int targetResist = action.scalingStat == StatScaling.STR ? targetUnit.defense : targetUnit.resistance;
+        int damage = Mathf.Max(1, (baseStat + action.flatDamageBonus) - targetResist);
+        
+        // Inflict damage to target
+        targetUnit.TakeDamage(damage);
+
+        // Process self-restoration (Heal/Mana) from action effects
+        if (action.selfHealAmount > 0)
+        {
+            currentHP = Mathf.Min(currentHP + action.selfHealAmount, maxHP);
+            if (unitHUD != null) unitHUD.TriggerStatHighlight("HP");
+            Debug.Log($"[{unitName}] Healed {action.selfHealAmount} HP from action effect.");
+        }
+
+        if (action.selfManaRestoreAmount > 0)
+        {
+            currentMP = Mathf.Min(currentMP + action.selfManaRestoreAmount, maxMP);
+            if (unitHUD != null) unitHUD.TriggerStatHighlight("MP");
+            Debug.Log($"[{unitName}] Restored {action.selfManaRestoreAmount} MP from action effect.");
+        }
+
+        // Process temporary attribute buffs from action effects
+        bool hasBuff = action.strBuffBonus > 0 || action.defBuffBonus > 0 || action.intBuffBonus > 0 || action.resBuffBonus > 0;
+        if (hasBuff)
+        {
+            ActiveBuff newBuff = new ActiveBuff
+            {
+                buffName = action.actionName,
+                strAmount = action.strBuffBonus,
+                defAmount = action.defBuffBonus,
+                intAmount = action.intBuffBonus,
+                resAmount = action.resBuffBonus,
+                turnsRemaining = action.actionBuffDuration
+            };
+
+            activeBuffs.Add(newBuff);
+            RecalculateStats(); 
+
+            // Trigger visual highlights for stats
+            if (unitHUD != null)
+            {
+                if (action.strBuffBonus > 0) unitHUD.TriggerStatHighlight("STR");
+                if (action.defBuffBonus > 0) unitHUD.TriggerStatHighlight("DEF");
+                if (action.intBuffBonus > 0) unitHUD.TriggerStatHighlight("INT");
+                if (action.resBuffBonus > 0) unitHUD.TriggerStatHighlight("RES");
+            }
+        }
+        else
         {
             UpdateVisualHUD();
         }

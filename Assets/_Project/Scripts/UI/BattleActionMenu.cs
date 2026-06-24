@@ -175,58 +175,60 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
 
         lastClickedAction = "";
         lastClickTime = 0f;
-        isExecutingAction = true;
 
-        // Consume any required attribute resource costs before starting
-        playerUnit.ConsumeCost(slot.costType, slot.costAmount);
+        if (slot.categoryName != "Item") isExecutingAction = true;
 
         UnitAnimator playerAnimator = playerUnit.GetComponent<UnitAnimator>();
         Transform enemyTransform = GetEnemyTransform();
         BattleUnit enemyUnit = GetEnemyUnit();
 
-        // Evaluate specific category behaviors
-        if (slot.categoryName == "Attack")
+        if (slot.linkedAction != null)
         {
+            ActionData action = slot.linkedAction;
+
+            // Remove health or mana based on cost in ActionData
+            playerUnit.ConsumeCost(action.costType, action.costAmount);
+
             HideMenuUI();
             CloseCurrentSubMenu();
 
             if (playerAnimator != null && enemyTransform != null)
             {
-                int damage = Mathf.Max(1, playerUnit.strength - (enemyUnit != null ? enemyUnit.defense : 0));
+                // Damage calculation
+                // Check which stat is used for damage calculation
+                int baseStat = action.scalingStat == StatScaling.STR ? playerUnit.strength : playerUnit.intelligence;
+                int targetResist = action.scalingStat == StatScaling.STR ? (enemyUnit != null ? enemyUnit.defense : 0) : (enemyUnit != null ? enemyUnit.resistance : 0);
                 
-                StartCoroutine(playerAnimator.MeleeAttackRoutine(enemyTransform, () => 
-                {
-                    if (enemyUnit != null) enemyUnit.TakeDamage(damage);
-                }));
+                // Damage formula: (Base Stat + Bonus Flat) - Enemy Resist
+                int damage = Mathf.Max(1, (baseStat + action.flatDamageBonus) - targetResist);
 
-                StartCoroutine(WaitAndEndTurn(1.5f)); 
-            }
-            else EndPlayerTurnSequence();
-        }
-        else if (slot.categoryName == "Skill")
-        {
-            HideMenuUI();
-            CloseCurrentSubMenu();
-
-            if (playerAnimator != null && enemyTransform != null)
-            {
-                int damage = Mathf.Max(1, playerUnit.intelligence - (enemyUnit != null ? enemyUnit.resistance : 0));
-                GameObject fireballPrefab = Resources.Load<GameObject>("Fireball"); 
-                
-                if (fireballPrefab != null)
+                // Heal effect
+                if (action.selfHealAmount > 0)
                 {
-                    StartCoroutine(playerAnimator.RangedAttackRoutine(enemyTransform, fireballPrefab, () => 
+                    playerUnit.currentHP = Mathf.Min(playerUnit.currentHP + action.selfHealAmount, playerUnit.maxHP);
+                    playerUnit.UpdateVisualHUD();
+                    Debug.Log($"[{playerUnit.unitName}] Healed for {action.selfHealAmount} HP from action effect.");
+                }
+
+                // Play animation based on type
+                if (action.animationType == ActionAnimationType.Melee) // Melee
+                {
+                    StartCoroutine(playerAnimator.MeleeAttackRoutine(enemyTransform, () => 
                     {
                         if (enemyUnit != null) enemyUnit.TakeDamage(damage);
                     }));
-
-                    StartCoroutine(WaitAndEndTurn(1.5f));
                 }
-                else
+                else // Ranged
                 {
-                    Debug.LogError("[Action Menu] Prefab 'Fireball' not found");
-                    EndPlayerTurnSequence();
+                    // Gunakan prefab bawaan ActionData (atau Fireball jika kosong)
+                    GameObject projPrefab = action.projectilePrefab != null ? action.projectilePrefab : Resources.Load<GameObject>("Fireball");
+                    StartCoroutine(playerAnimator.RangedAttackRoutine(enemyTransform, projPrefab, () => 
+                    {
+                        if (enemyUnit != null) enemyUnit.TakeDamage(damage);
+                    }));
                 }
+
+                StartCoroutine(WaitAndEndTurn(1.5f)); 
             }
             else EndPlayerTurnSequence();
         }
@@ -272,7 +274,7 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    private void HideMenuUI()
+    public void HideMenuUI()
     {
         if (mainCanvasGroup != null)
         {

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Item_Red Potion
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Red Potion
-  itemDescription: Heal 3 HP
+  itemDescription: Heal 2 HP
   itemIcon: {fileID: -439307089, guid: 1d112bfd37b4958439cd7ae6aac3b269, type: 3}
-  healHP: 3
-  restoreMP: 0
-  buffSTR: 0
-  buffDEF: 0
-  buffINT: 0
-  buffRES: 0
+  healAmount: 2
+  manaRestoreAmount: 0
+  strBonus: 0
+  defBonus: 0
+  intBonus: 0
+  resBonus: 0

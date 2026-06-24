@@ -4,6 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class EnemyEncounter : MonoBehaviour
 {
+    [Header("Persistent Data")]
+    [Tooltip("Enemy unique ID, make sure every enemy has different ID name")]
+    [SerializeField] private string encounterID = "Dream_Enemy_1";
+
     [Header("Encounter Settings")]
     [Tooltip("The exact name of the battle scene to load.")]
     [SerializeField] private string battleSceneName = "Battle Scene";
@@ -23,9 +27,23 @@ public class EnemyEncounter : MonoBehaviour
 
     private bool hasTriggered = false;
 
+    private void Start()
+    {
+        // Check if this enemy is defeated
+        if (PlayerPrefs.GetString("LastEncounterID", "") == encounterID && 
+            PlayerPrefs.GetInt("DestroyLastEnemyTrigger", 0) == 1)
+        {
+            PlayerPrefs.SetInt("DestroyLastEnemyTrigger", 0);
+            PlayerPrefs.SetString("LastEncounterID", "");
+            
+            Debug.Log($"[EnemyEncounter] {encounterID} defeated.");
+            Destroy(gameObject);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Only trigger once, and only if the Player steps on enemy
+        // Only trigger once, and only if player steps on enemy
         if (!hasTriggered && collision.CompareTag("Player"))
         {
             hasTriggered = true;
@@ -35,14 +53,25 @@ public class EnemyEncounter : MonoBehaviour
 
     private IEnumerator TriggerBattleSequence()
     {
+        PlayerPrefs.SetString("LastEncounterID", encounterID);
+
         // Lock Player movement globally
         PlayerStateManager.isMovementAllowed = false;
 
-        // Force stop player physics momentum to prevent sliding
-        Rigidbody2D playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-        if (playerRb != null) playerRb.linearVelocity = Vector2.zero;
+        // Force stop player physics momentum to prevent sliding and save player position
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null) {
+            Rigidbody2D playerRb = playerObj.GetComponent<Rigidbody2D>();
+            playerRb.linearVelocity = Vector2.zero;
 
-        // Play overshoot animation for exclamation mark
+            PlayerPrefs.SetFloat("ReturnPosX", playerObj.transform.position.x);
+            PlayerPrefs.SetFloat("ReturnPosY", playerObj.transform.position.y);
+            PlayerPrefs.SetFloat("ReturnPosZ", playerObj.transform.position.z);
+            PlayerPrefs.SetInt("HasSavedPosition", 1);
+            PlayerPrefs.Save();
+        }
+
+        // Animate exclamation mark
         if (exclamationMark != null)
         {
             exclamationMark.SetActive(true);
@@ -55,7 +84,8 @@ public class EnemyEncounter : MonoBehaviour
             while (timeElapsed < phase1Duration)
             {
                 timeElapsed += Time.deltaTime;
-                exclamationMark.transform.localScale = Vector3.Lerp(startScale, overshootScale, timeElapsed / phase1Duration);
+                exclamationMark.transform.localScale = Vector3.Lerp(startScale, overshootScale,
+                    timeElapsed / phase1Duration);
                 yield return null;
             }
 
@@ -65,7 +95,8 @@ public class EnemyEncounter : MonoBehaviour
             while (timeElapsed < phase2Duration)
             {
                 timeElapsed += Time.deltaTime;
-                exclamationMark.transform.localScale = Vector3.Lerp(overshootScale, finalScale, timeElapsed / phase2Duration);
+                exclamationMark.transform.localScale = Vector3.Lerp(overshootScale, finalScale,
+                    timeElapsed / phase2Duration);
                 yield return null;
             }
 

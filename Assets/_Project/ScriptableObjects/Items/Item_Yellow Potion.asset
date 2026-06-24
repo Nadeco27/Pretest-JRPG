@@ -15,9 +15,9 @@ MonoBehaviour:
   itemName: Yellow Potion
   itemDescription: Gain 1 RES for 1 turn.
   itemIcon: {fileID: -1322619540, guid: 6377c32e1f9275a46802421ebf83f8f1, type: 3}
-  healHP: 0
-  restoreMP: 0
-  buffSTR: 0
-  buffDEF: 0
-  buffINT: 0
-  buffRES: 1
+  healAmount: 0
+  manaRestoreAmount: 0
+  strBonus: 0
+  defBonus: 0
+  intBonus: 0
+  resBonus: 1

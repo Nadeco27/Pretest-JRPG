@@ -50,15 +50,16 @@ public class BattleCutsceneManager : MonoBehaviour
 
     public IEnumerator ExecuteBattleCutscene(string blockName)
     {
-        // Lock the turn-based referee system status
+        // Remember the state before the cutscene interruption
         BattleState previousState = BattleState.PLAYERTURN;
+        
         if (BattleManager.Instance != null)
         {
             previousState = BattleManager.Instance.state;
             BattleManager.Instance.ChangeState(BattleState.BUSY_CUTSCENE);
         }
 
-        // Execute the specific narrative flowchart block
+        // Execute narrative flowchart block from Fungus
         if (battleFlowchart.HasBlock(blockName))
         {
             battleFlowchart.ExecuteBlock(blockName);
@@ -71,10 +72,23 @@ public class BattleCutsceneManager : MonoBehaviour
             yield return null;
         }
 
-        // Resume state balance
         if (BattleManager.Instance != null)
         {
-            BattleManager.Instance.ChangeState(previousState);
+            // If there is queue, execute state in queue
+            if (BattleManager.Instance.hasPendingState)
+            {
+                BattleState nextState = BattleManager.Instance.pendingState;
+                BattleManager.Instance.hasPendingState = false; // Reset antrean
+                
+                Debug.Log($"[Cutscene] Dialogue finished. Executing state from queue: {nextState}");
+                BattleManager.Instance.ChangeState(nextState, true);
+            }
+            // If no queue, back to previous state
+            else
+            {
+                Debug.Log($"[Cutscene] Dialogue finished. Resuming battle back to: {previousState}");
+                BattleManager.Instance.ChangeState(previousState, true);
+            }
         }
     }
 }

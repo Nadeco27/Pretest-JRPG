@@ -23,8 +23,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private BackpackUI backpackUI;
     public bool isDialogueActive = false;
 
-    // Master database data collection list
+    // Master database data collection list and backup item list
     private List<InventoryItem> inventoryDatabase = new List<InventoryItem>();
+    private List<InventoryItem> preBattleBackup = new List<InventoryItem>();
 
     private void Awake()
     {
@@ -58,13 +59,58 @@ public class InventoryManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        isDialogueActive = false;
+        BackpackUI foundUI = Object.FindFirstObjectByType<BackpackUI>(FindObjectsInactive.Include);
+
+        if (foundUI != null)
+        {
+            backpackUI = foundUI;
+            Debug.Log($"[InventoryManager] Successfully bound to BackpackUI in {scene.name}");
+            backpackUI.RefreshInventoryUI(inventoryDatabase);
+        }
+        else
+        {
+            backpackUI = null;
+            Debug.Log($"[InventoryManager] No BackpackUI found in {scene.name}.");
+        }
     }
 
     // Dynamic UI binding registration method
     public void RegisterBackpackUI(BackpackUI ui)
     {
         backpackUI = ui;
+    }
+
+    // Save item list before battle
+    public void SavePreBattleState()
+    {
+        preBattleBackup.Clear();
+
+        // Deep copy all inventory item to backup list
+        foreach (InventoryItem item in inventoryDatabase)
+        {
+            preBattleBackup.Add(new InventoryItem(item.data, item.quantity));
+        }
+
+        Debug.Log("[InventoryManager] Snapshot Inventory made.");
+    }
+
+    public void RestorePreBattleState()
+    {
+        inventoryDatabase.Clear();
+
+        // Copy item from backup to inventory
+        foreach (InventoryItem backupItem in preBattleBackup)
+        {
+            inventoryDatabase.Add(new InventoryItem(backupItem.data, backupItem.quantity));
+        }
+
+        Debug.Log("[InventoryManager] Inventory restored to before battle state");
+
+        // Update UI when backpack is openend
+        if (backpackUI != null && backpackUI.IsOpen())
+        {
+            backpackUI.RefreshInventoryUI(inventoryDatabase);
+        }
     }
 
     public void ToggleBackpackFromButton()
@@ -76,6 +122,7 @@ public class InventoryManager : MonoBehaviour
     private void HandleKeyboardInput()
     {
         if (isDialogueActive) return;
+        if (backpackUI == null) return;
 
         // Toggle bag display via "B" key code
         if (Input.GetKeyDown(KeyCode.B))

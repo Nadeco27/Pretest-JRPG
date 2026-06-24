@@ -88,4 +88,16 @@ public class BattleInfoPanel : MonoBehaviour
         // Format string to mm:ss
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+
+    public string GetCurrentTimeFormatted()
+    {
+        int minutes = Mathf.FloorToInt(battleTimer / 60f);
+        int seconds = Mathf.FloorToInt(battleTimer % 60f);
+        return string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public int GetCurrentCycle()
+    {
+        return currentCycle;
+    }
 }
