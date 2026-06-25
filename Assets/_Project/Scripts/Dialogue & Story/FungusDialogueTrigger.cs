@@ -2,7 +2,7 @@ using UnityEngine;
 using Fungus;
 
 [RequireComponent(typeof(Collider2D))]
-public class FungusDialogTrigger : MonoBehaviour
+public class FungusDialogueTrigger : MonoBehaviour
 {
     [Header("Persistent Data")]
     [Tooltip("Unique ID for each dialogue trigger")]

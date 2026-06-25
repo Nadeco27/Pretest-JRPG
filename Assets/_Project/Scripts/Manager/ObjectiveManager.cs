@@ -43,6 +43,10 @@ public class ObjectiveManager : MonoBehaviour
         
         if (completedObjective != null)
         {
+            // Save cleared objective status to player prefs
+            PlayerPrefs.SetInt("ObjCompleted_" + objectiveId, 1);
+            PlayerPrefs.Save();
+            
             objectiveUI.CompleteSpecificObjective(objectiveId);
             currentActiveObjectives.Remove(completedObjective);
 
@@ -69,6 +73,8 @@ public class ObjectiveManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         
         currentGroupIndex++;
+        isTransitioning = false; 
+        
         FetchNextObjectiveGroup();
     }
 
@@ -79,7 +85,11 @@ public class ObjectiveManager : MonoBehaviour
         // If dialogue done and there is objective UI backlog, then render it
         if (!isActive && pendingUIDisplay)
         {
-            objectiveUI.DisplayNewObjectiveGroup(currentActiveObjectives);
+            // Make sure there is available objectiveto complete before showing UI
+            if (currentActiveObjectives.Count > 0)
+            {
+                objectiveUI.DisplayNewObjectiveGroup(currentActiveObjectives);
+            }
             pendingUIDisplay = false;
         }
     }
@@ -89,9 +99,28 @@ public class ObjectiveManager : MonoBehaviour
         if (currentGroupIndex >= objectiveQueue.Count) return;
 
         ObjectiveGroup nextGroup = objectiveQueue[currentGroupIndex];
-        currentActiveObjectives = new List<ObjectiveData>(nextGroup.objectives);
+        
+        // Filter showing new uncleared objective 
+        currentActiveObjectives = new List<ObjectiveData>();
+        
+        // Put uncleared objective to active objective list
+        foreach (ObjectiveData obj in nextGroup.objectives)
+        {
+            if (PlayerPrefs.GetInt("ObjCompleted_" + obj.objectiveId, 0) == 0)
+            {
+                currentActiveObjectives.Add(obj);
+            }
+        }
 
-        // If in dialogue, dont render UI, but mark as 'pending'
+        // Check if objective group cleared, and then skip it
+        bool hasMandatoryLeft = currentActiveObjectives.Exists(o => !o.isOptional);
+        if (!hasMandatoryLeft && nextGroup.objectives.Count > 0)
+        {
+            currentGroupIndex++;
+            FetchNextObjectiveGroup();
+            return;
+        }
+
         if (!isHiddenByDialogue)
         {
             objectiveUI.DisplayNewObjectiveGroup(currentActiveObjectives);
@@ -100,7 +129,5 @@ public class ObjectiveManager : MonoBehaviour
         {
             pendingUIDisplay = true;
         }
-
-        isTransitioning = false;
     }
 }

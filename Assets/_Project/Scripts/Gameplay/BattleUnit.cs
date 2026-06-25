@@ -86,12 +86,6 @@ public class BattleUnit : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        // Damage mitigation logic (50% reduction from defend)
-        if (isDefending)
-        {
-            damage = Mathf.CeilToInt(damage * 0.5f);
-        }
-
         currentHP -= damage;
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
 
@@ -255,16 +249,25 @@ public class BattleUnit : MonoBehaviour
 
     public void ExecuteActionEffects(ActionData action, BattleUnit targetUnit)
     {
-        // Consume health or mana cost in this action
+        // Consume Health or Mana as cost of the action
         ConsumeCost(action.costType, action.costAmount);
 
-        // Calculate damage
+        // Damage calculation
         int baseStat = action.scalingStat == StatScaling.STR ? strength : intelligence;
+        int rawDamage = baseStat + action.flatDamageBonus;
+
+        // If player is using Defend, half the damage before calculation
+        if (targetUnit.isDefending)
+        {
+            rawDamage = Mathf.CeilToInt(rawDamage * 0.5f);
+        }
+
+        // Substract damage with DEF/RES atribute
         int targetResist = action.scalingStat == StatScaling.STR ? targetUnit.defense : targetUnit.resistance;
-        int damage = Mathf.Max(1, (baseStat + action.flatDamageBonus) - targetResist);
+        int finalDamage = Mathf.Max(0, rawDamage - targetResist);
         
-        // Inflict damage to target
-        targetUnit.TakeDamage(damage);
+        // Apply damage to target
+        targetUnit.TakeDamage(finalDamage);
 
         // Process self-restoration (Heal/Mana) from action effects
         if (action.selfHealAmount > 0)
@@ -292,13 +295,13 @@ public class BattleUnit : MonoBehaviour
                 defAmount = action.defBuffBonus,
                 intAmount = action.intBuffBonus,
                 resAmount = action.resBuffBonus,
-                turnsRemaining = action.actionBuffDuration
+                turnsRemaining = action.actionBuffDuration 
             };
 
             activeBuffs.Add(newBuff);
             RecalculateStats(); 
 
-            // Trigger visual highlights for stats
+            // Atribute buff HUD highlight
             if (unitHUD != null)
             {
                 if (action.strBuffBonus > 0) unitHUD.TriggerStatHighlight("STR");
