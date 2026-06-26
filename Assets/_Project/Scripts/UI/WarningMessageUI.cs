@@ -66,6 +66,7 @@ public class WarningMessageUI : MonoBehaviour
 
     private IEnumerator WarningSequenceRoutine()
     {
+        AudioManager.Instance.Play("FailBuzz");
         Transform targetTransform = panelRectTransform != null ? panelRectTransform : transform;
         float elapsed = 0f;
 

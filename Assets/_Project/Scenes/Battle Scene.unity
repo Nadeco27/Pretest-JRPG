@@ -5535,7 +5535,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Continue
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e553ae0596eee6448b8bb99a0b687914, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -5543,7 +5543,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_fontColor: {r: 0.9098039, g: 0.9098039, b: 0.9098039, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5602,7 +5602,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &658961407
@@ -6336,7 +6336,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -6347,7 +6347,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: -1400966810, guid: 3802ec78fd2ff3d4caa52877978049ea, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -6381,7 +6381,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 649223268058989734, guid: 3802ec78fd2ff3d4caa52877978049ea, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6974,6 +6974,15 @@ MonoBehaviour:
     pitchRandomness: 0
     isMusic: 0
     source: {fileID: 0}
+  - id: FailBuzz
+    clip: {fileID: 8300000, guid: 510ff1b9bd80afe448207d52e10d700d, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 0
+    source: {fileID: 0}
 --- !u!4 &848510847
 Transform:
   m_ObjectHideFlags: 0
@@ -7304,7 +7313,7 @@ MonoBehaviour:
 
       -
       <b>Single-Right Click</b> on a menu to close the sub-menu. '
-    optionalImage: {fileID: 0}
+    optionalImage: {fileID: 638052856891300310, guid: 3814b1729222e9443898ea0440854aea, type: 3}
   - explanationText: You can only do 1 action (Attack, Skill, Defend) per turn. But
       using <b>Item</b> doesn't count as doing action and does not end your turn.
     optionalImage: {fileID: 0}
@@ -13034,8 +13043,10 @@ MonoBehaviour:
     y: -340
     width: 1114
     height: 859
-  selectedBlocks: []
-  selectedCommands: []
+  selectedBlocks:
+  - {fileID: 1560875303}
+  selectedCommands:
+  - {fileID: 1560875304}
   variables: []
   description: 
   stepPause: 0

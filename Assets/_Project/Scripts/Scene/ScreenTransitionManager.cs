@@ -125,4 +125,28 @@ public class ScreenTransitionManager : MonoBehaviour
             transitionMaterial.SetFloat(radiusPropertyID, 1f);
         }
     }
+
+    public void QuitGameWithTransition()
+    {
+        if (isTransitioning) return;
+        
+        StopAllCoroutines();
+        StartCoroutine(QuitRoutine());
+    }
+
+    private IEnumerator QuitRoutine()
+    {
+        isTransitioning = true;
+
+        // Animate Iris-Out to black
+        yield return StartCoroutine(AnimateIrisRoutine(1f, 0f));
+        
+        Debug.Log("[ScreenTransitionManager] Application Quit Executed.");
+        Application.Quit();
+
+        // Optional: Force stop if running inside Unity Editor
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+    }
 }

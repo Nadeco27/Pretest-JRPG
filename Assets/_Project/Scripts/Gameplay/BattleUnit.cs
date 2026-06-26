@@ -143,7 +143,7 @@ public class BattleUnit : MonoBehaviour
         {
             if (AudioManager.Instance != null)
             {
-                AudioManager.Instance.Play("Defend Use");
+                AudioManager.Instance.Play("DefendUse");
             }
         }
     }

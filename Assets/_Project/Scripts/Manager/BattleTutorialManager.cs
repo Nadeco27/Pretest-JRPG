@@ -104,6 +104,7 @@ public class BattleTutorialManager : MonoBehaviour
 
     private void OnNextButtonClicked()
     {
+        AudioManager.Instance.Play("ButtonClick");
         if (currentPageIndex < tutorialPages.Count - 1)
         {
             currentPageIndex++;
@@ -118,6 +119,7 @@ public class BattleTutorialManager : MonoBehaviour
 
     private void OnPrevButtonClicked()
     {
+        AudioManager.Instance.Play("ButtonClick");
         if (currentPageIndex > 0)
         {
             currentPageIndex--;

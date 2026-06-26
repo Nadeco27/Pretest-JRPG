@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class PauseManager : MonoBehaviour
 
     [Header("Audio Configurations")]
     [SerializeField] private AudioMixer audioMixer;
-    [Tooltip("Nama parameter Mixer Exposures wajib sama dengan string ini!")]
+    [Tooltip("Mixer Exporuse name must be the same as the string written below!")]
     [SerializeField] private string masterVolumeParam = "MasterVol";
     [SerializeField] private string musicVolumeParam = "MusicVol";
     [SerializeField] private string sfxVolumeParam = "SFXVol";
@@ -32,6 +33,21 @@ public class PauseManager : MonoBehaviour
         }
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        FindSceneUIReferences();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void Update()
     {
         // Detect Esc button to pause the game
@@ -39,6 +55,7 @@ public class PauseManager : MonoBehaviour
         {
             // Do not let player pause the game in the middle of Fungus dialogue
             if (InventoryManager.Instance != null && InventoryManager.Instance.isDialogueActive) return;
+            if (BattleFungusHelper.isMidBattleDialogueActive) return;
 
             if (isPaused)
             {
@@ -110,7 +127,30 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    // Autio mixer (will be moved in the future)
+    private void FindSceneUIReferences()
+    {
+        // Get all root objects in the newly loaded scene
+        GameObject[] rootObjects = SceneManager.GetActiveScene().GetRootGameObjects();
+
+        foreach (GameObject root in rootObjects)
+        {
+            // Include inactive objects in the search parameter
+            Transform[] allTransforms = root.GetComponentsInChildren<Transform>(true);
+
+            foreach (Transform targetTransform in allTransforms)
+            {
+                if (targetTransform.name == "PauseCanvas")
+                {
+                    pauseUI = targetTransform.GetComponent<PauseUI>();
+                }
+                else if (targetTransform.name == "SettingsPanel")
+                {
+                    settingsPanel = targetTransform.gameObject;
+                }
+            }
+        }
+    }
+
     public void SetMasterVolume(float value) => SetMixerVolume(masterVolumeParam, value);
     public void SetMusicVolume(float value) => SetMixerVolume(musicVolumeParam, value);
     public void SetSFXVolume(float value) => SetMixerVolume(sfxVolumeParam, value);
