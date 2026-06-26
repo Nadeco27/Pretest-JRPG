@@ -75,6 +75,7 @@ public class UnitAnimator : MonoBehaviour
         float recoveryDuration = 0.15f;
 
         // Animate recoil
+        AudioManager.Instance.Play("SkillUse");
         float elapsed = 0f;
         while (elapsed < recoilDuration)
         {

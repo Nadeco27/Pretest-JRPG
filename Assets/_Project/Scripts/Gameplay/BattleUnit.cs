@@ -86,6 +86,7 @@ public class BattleUnit : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+
         currentHP -= damage;
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
 
@@ -96,6 +97,18 @@ public class BattleUnit : MonoBehaviour
         if (!isPlayerUnit && BattleCutsceneManager.Instance != null)
         {
             BattleCutsceneManager.Instance.CheckEnemyHealthThreshold(currentHP);
+        }
+
+        if (AudioManager.Instance != null)
+        {
+            if (isDefending)
+            {
+                AudioManager.Instance.Play("DefendDamage");
+            }
+            else
+            {
+                AudioManager.Instance.Play("TakeDamage");
+            }
         }
 
         if (currentHP <= 0)
@@ -125,6 +138,14 @@ public class BattleUnit : MonoBehaviour
         {
             shieldVFXObject.SetActive(state);
         }
+
+        if (state == true) 
+        {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.Play("Defend Use");
+            }
+        }
     }
 
     public void ConsumeCost(ActionCostType costType, int amount)
@@ -153,6 +174,8 @@ public class BattleUnit : MonoBehaviour
 
     public void UseItem(ItemData item)
     {
+        AudioManager.Instance.Play("ItemUse");
+
         bool hasHUDChanged = false;
 
         // Healing and Mana regen logic

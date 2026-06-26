@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using Fungus;
 
 public class AudioManager : MonoBehaviour
@@ -42,16 +43,18 @@ public class AudioManager : MonoBehaviour
     
     private void Start()
     {
-        // Load saved volume settings from PlayerPrefs, default to 1f (100%) if not found
-        float masterVol = PlayerPrefs.GetFloat("MasterVol", 1f);
-        float musicVol = PlayerPrefs.GetFloat("MusicVol", 1f);
-        float sfxVol = PlayerPrefs.GetFloat("SFXVol", 1f);
+        // Load saved volume settings from PlayerPrefs, default to 50% if not found
+        float masterVol = PlayerPrefs.GetFloat("MasterVol", 0.5f);
+        float musicVol = PlayerPrefs.GetFloat("MusicVol", 0.5f);
+        float sfxVol = PlayerPrefs.GetFloat("SFXVol", 0.5f);
 
         SetMasterVolume(masterVol);
         SetMusicVolume(musicVol);
         SetSFXVolume(sfxVol);
 
         StartCoroutine(HijackFungusAudio());
+        // Check which scene is active to play BGM
+        TriggerSceneBGM(SceneManager.GetActiveScene().name);
     }
 
     private void InitializeSounds()
@@ -179,6 +182,30 @@ public class AudioManager : MonoBehaviour
                 Debug.Log("[AudioManager] Sucesfully take over Fungus AudioManager and send it to AudioMixer");
             }
         }
+    }
+
+    private void TriggerSceneBGM(string sceneName)
+    {
+        Debug.Log($"[AudioManager] Moving to scene: '{sceneName}'. Checking music.");
+
+        if (sceneName == "Main Menu" || sceneName == "House Scene")
+        {
+            PlayMusic("MainMusic", 1.5f);
+        }
+        else if (sceneName == "Dream Scene")
+        {
+            PlayMusic("DreamMusic", 1.5f);
+        }
+        else if (sceneName == "Battle Scene")
+        {
+            PlayMusic("BattleMusic", 0.5f); 
+        }
+    }
+
+    public void UpdateMusicForScene(string sceneName)
+    {
+        Debug.Log($"[AudioManager] Scene '{sceneName}' loaded, adjusting music..");
+        TriggerSceneBGM(sceneName);
     }
 
     // Audio mixer integration

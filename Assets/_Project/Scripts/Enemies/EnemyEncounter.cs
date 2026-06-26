@@ -71,6 +71,8 @@ public class EnemyEncounter : MonoBehaviour
         // Animate exclamation mark
         if (exclamationMark != null)
         {
+            AudioManager.Instance.Play("EnemyTrigger");
+
             exclamationMark.SetActive(true);
             Vector3 startScale = Vector3.zero;
 

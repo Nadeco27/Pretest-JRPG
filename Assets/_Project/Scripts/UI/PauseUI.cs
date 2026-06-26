@@ -45,9 +45,9 @@ public class PauseUI : MonoBehaviour
         sfxVolumeSlider.onValueChanged.AddListener((val) => AudioManager.Instance.SetSFXVolume(val));
 
         // Load saved values from PlayerPrefs
-        masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVol", 1f);
-        musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVol", 1f);
-        sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVol", 1f);
+        masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVol", 0.5f);
+        musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVol", 0.5f);
+        sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVol", 0.5f);
 
         container.SetActive(false);
     }

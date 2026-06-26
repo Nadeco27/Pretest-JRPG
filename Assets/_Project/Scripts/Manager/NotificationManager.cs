@@ -19,6 +19,7 @@ public class NotificationManager : MonoBehaviour
     public void ShowItemNotification(ItemData item, int amount)
     {
         NotificationRowUI newNotification = Instantiate(notificationPrefab, notificationContainer);
+        AudioManager.Instance.Play("ItemGet");
         
         // Ensures  newest notification appears at bottom of the list
         newNotification.transform.SetAsLastSibling(); 

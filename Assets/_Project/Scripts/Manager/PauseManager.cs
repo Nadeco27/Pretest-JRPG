@@ -67,36 +67,36 @@ public class PauseManager : MonoBehaviour
         
         if (pauseUI != null) pauseUI.Show();
         if (settingsPanel != null) settingsPanel.SetActive(false);
-        
-        Debug.Log("[PauseManager] Game Paused. Time frozen.");
     }
 
     public void ResumeGame()
     {
         isPaused = false;
         
-        Time.timeScale = 1f; 
+        Time.timeScale = 1f;
+        AudioManager.Instance.Play("ButtonClick");
         
         if (pauseUI != null) pauseUI.Hide(false);
         if (settingsPanel != null) settingsPanel.SetActive(false);
-        
-        Debug.Log("[PauseManager] Game Resumed. Time running.");
     }
 
     public void OpenSettings()
     {
         if (settingsPanel != null) settingsPanel.SetActive(true);
+        AudioManager.Instance.Play("ButtonClick");
     }
 
     public void CloseSettings()
     {
         if (settingsPanel != null) settingsPanel.SetActive(false);
+        AudioManager.Instance.Play("ButtonClick");
     }
 
     public void QuitToMainMenu(string mainMenuSceneName)
     {
         Time.timeScale = 1f; 
         isPaused = false;
+        AudioManager.Instance.Play("ButtonClick");
 
         Debug.Log("[PauseManager] Returning to Main Menu...");
         

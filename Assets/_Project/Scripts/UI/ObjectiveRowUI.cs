@@ -21,6 +21,7 @@ public class ObjectiveRowUI : MonoBehaviour
     // Flips the visual state when the specific objective is completed
     public void MarkComplete()
     {
+        AudioManager.Instance.Play("Checkmark");
         statusImage.sprite = currentData.checkedCheckboxSprite;
     }
 }

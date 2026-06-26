@@ -93,6 +93,11 @@ public class ScreenTransitionManager : MonoBehaviour
         yield return StartCoroutine(AnimateIrisRoutine(1f, 0f));
         SceneManager.LoadScene(sceneName);
 
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.UpdateMusicForScene(sceneName);
+        }
+
         isTransitioning = false;
     }
 

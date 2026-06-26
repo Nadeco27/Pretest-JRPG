@@ -34,6 +34,8 @@ public class CardboardInteractable : InteractableBase
         hasBeenLooted = true;
         HidePrompt();
 
+        AudioManager.Instance.Play("CardboardOpen");
+
         // Disable the trigger collider so the player's radar no longer detects this box
         Collider2D[] colliders = GetComponents<Collider2D>();
         foreach (Collider2D col in colliders)

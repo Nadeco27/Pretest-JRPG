@@ -185,6 +185,8 @@ public class BattleManager : MonoBehaviour
         if (diamondActionMenuParent != null) diamondActionMenuParent.SetActive(false);
         if (BattleInfoPanel.Instance != null) BattleInfoPanel.Instance.StopTimer();
 
+        AudioManager.Instance.Play("BattleWin");
+
         // Slow motion effect
         Time.timeScale = 0.3f;
 
@@ -225,6 +227,8 @@ public class BattleManager : MonoBehaviour
         // Slow motion effect
         Time.timeScale = 0.3f;
         yield return new WaitForSecondsRealtime(1.5f);
+
+        AudioManager.Instance.Play("BattleLose");
 
         // Restore normal time scale
         Time.timeScale = 1f;

@@ -116,6 +116,7 @@ public class InventoryManager : MonoBehaviour
     public void ToggleBackpackFromButton()
     {
         if (isDialogueActive) return;
+        AudioManager.Instance.Play("ButtonClick");
         backpackUI.ToggleBackpack(inventoryDatabase);
     }
 

@@ -1912,11 +1912,11 @@ Transform:
   m_GameObject: {fileID: 382205992}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 995.7738, y: 579.91364, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1243203369}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &382205994
 MonoBehaviour:
@@ -5817,6 +5817,191 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1206212828}
   m_CullTransparentMesh: 1
+--- !u!1 &1219176794
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1219176796}
+  - component: {fileID: 1219176795}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1219176795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219176794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3345f6febadbc2e40a4afd0188e657bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  mainMixer: {fileID: 24100000, guid: e11aefe263972c6429b5cc8cd981af1b, type: 2}
+  musicGroup: {fileID: 8655130937937010400, guid: e11aefe263972c6429b5cc8cd981af1b, type: 2}
+  sfxGroup: {fileID: 5407898778758065983, guid: e11aefe263972c6429b5cc8cd981af1b, type: 2}
+  fungusMixer: {fileID: 24100000, guid: 5f171e3c1cd39ff488490da837375068, type: 2}
+  fungusVolumeParam: FungusSFXVol
+  sounds:
+  - id: MainMusic
+    clip: {fileID: 8300000, guid: 1637cbea42976354bad73df33eacdcd4, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 1
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 1
+    source: {fileID: 0}
+  - id: DreamMusic
+    clip: {fileID: 8300000, guid: 81e09949acfacbf4ea49ba379b5dea7f, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 1
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 1
+    source: {fileID: 0}
+  - id: BattleMusic
+    clip: {fileID: 8300000, guid: 2fff2828978980048b92652260aa04bd, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 1
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 1
+    source: {fileID: 0}
+  - id: BattleLose
+    clip: {fileID: 8300000, guid: 34e7b85627f1f77488f891a8490df2bc, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - id: BattleWin
+    clip: {fileID: 8300000, guid: 6f8819891acbff14ea101bbb1c326548, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - id: ButtonClick
+    clip: {fileID: 8300000, guid: 1183a47b05f1c6a4dbf8fc8ee2d27c25, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0.5
+    isMusic: 0
+    source: {fileID: 0}
+  - id: CardboardOpen
+    clip: {fileID: 8300000, guid: c3d3abf07a63f10479cc5b0c199748d2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - id: ItemGet
+    clip: {fileID: 8300000, guid: 4faf715c58f1d044cb5f295f153a5b18, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - id: ItemUse
+    clip: {fileID: 8300000, guid: 76199f6e2d1d4bf4a998a5832cb21877, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 1
+    pitchRandomness: 0.1
+    isMusic: 0
+    source: {fileID: 0}
+  - id: SkillUse
+    clip: {fileID: 8300000, guid: caeb8d82491fb4e40ba0f66828b9bb63, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 1
+    pitchRandomness: 0.1
+    isMusic: 0
+    source: {fileID: 0}
+  - id: TakeDamage
+    clip: {fileID: 8300000, guid: 2828a5bfaeeccd441a9dd15fa9fb2463, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 1
+    pitchRandomness: 0.1
+    isMusic: 0
+    source: {fileID: 0}
+  - id: DefendDamage
+    clip: {fileID: 8300000, guid: 8da8b26b3abaffc4b9c32d0f045afced, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 1
+    pitchRandomness: 0.1
+    isMusic: 0
+    source: {fileID: 0}
+  - id: DefendUse
+    clip: {fileID: 8300000, guid: dbe7fe274d5c88e45954caeccabdb996, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - id: EnemyTrigger
+    clip: {fileID: 8300000, guid: 38f087e453eebc94192ff0480391d1ba, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - id: Checkmark
+    clip: {fileID: 8300000, guid: 884c4552e02542144a5924bf4f4931e5, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 0
+    source: {fileID: 0}
+--- !u!4 &1219176796
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219176794}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 995.7738, y: 579.91364, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1219619740
 GameObject:
   m_ObjectHideFlags: 0
@@ -6303,7 +6488,6 @@ Transform:
   m_Children:
   - {fileID: 2025896064}
   - {fileID: 1869083424}
-  - {fileID: 382205993}
   - {fileID: 243476091}
   - {fileID: 1875270582}
   m_Father: {fileID: 0}
@@ -10067,7 +10251,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1243203369}
+  - {fileID: 382205993}
   - {fileID: 1846819629}
+  - {fileID: 1219176796}
   - {fileID: 1232021831}
   - {fileID: 1099878423}
   - {fileID: 2113878028}

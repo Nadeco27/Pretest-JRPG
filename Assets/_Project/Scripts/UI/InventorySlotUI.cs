@@ -41,6 +41,7 @@ public class InventorySlotUI : MonoBehaviour
 
     private void OnSlotClicked()
     {
+        AudioManager.Instance.Play("ButtonClick");
         backpackUI.ShowItemDescription(currentItem, currentAmount);
     }
 }

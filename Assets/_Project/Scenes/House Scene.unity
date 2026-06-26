@@ -7022,6 +7022,10 @@ PrefabInstance:
       propertyPath: possibleDrops.Array.data[2].weight
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7805907478139619354, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8235641399303554090, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5618124
@@ -10136,7 +10140,142 @@ MonoBehaviour:
   sfxGroup: {fileID: 5407898778758065983, guid: e11aefe263972c6429b5cc8cd981af1b, type: 2}
   fungusMixer: {fileID: 24100000, guid: 5f171e3c1cd39ff488490da837375068, type: 2}
   fungusVolumeParam: FungusSFXVol
-  sounds: []
+  sounds:
+  - id: MainMusic
+    clip: {fileID: 8300000, guid: 1637cbea42976354bad73df33eacdcd4, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 1
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 1
+    source: {fileID: 0}
+  - id: DreamMusic
+    clip: {fileID: 8300000, guid: 81e09949acfacbf4ea49ba379b5dea7f, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 1
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 1
+    source: {fileID: 0}
+  - id: BattleMusic
+    clip: {fileID: 8300000, guid: 2fff2828978980048b92652260aa04bd, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 1
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 1
+    source: {fileID: 0}
+  - id: BattleLose
+    clip: {fileID: 8300000, guid: 34e7b85627f1f77488f891a8490df2bc, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - id: BattleWin
+    clip: {fileID: 8300000, guid: 6f8819891acbff14ea101bbb1c326548, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - id: ButtonClick
+    clip: {fileID: 8300000, guid: 1183a47b05f1c6a4dbf8fc8ee2d27c25, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0.5
+    isMusic: 0
+    source: {fileID: 0}
+  - id: CardboardOpen
+    clip: {fileID: 8300000, guid: c3d3abf07a63f10479cc5b0c199748d2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - id: ItemGet
+    clip: {fileID: 8300000, guid: 4faf715c58f1d044cb5f295f153a5b18, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - id: ItemUse
+    clip: {fileID: 8300000, guid: 76199f6e2d1d4bf4a998a5832cb21877, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 1
+    pitchRandomness: 0.1
+    isMusic: 0
+    source: {fileID: 0}
+  - id: SkillUse
+    clip: {fileID: 8300000, guid: caeb8d82491fb4e40ba0f66828b9bb63, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 1
+    pitchRandomness: 0.1
+    isMusic: 0
+    source: {fileID: 0}
+  - id: TakeDamage
+    clip: {fileID: 8300000, guid: 2828a5bfaeeccd441a9dd15fa9fb2463, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 1
+    pitchRandomness: 0.1
+    isMusic: 0
+    source: {fileID: 0}
+  - id: DefendDamage
+    clip: {fileID: 8300000, guid: 8da8b26b3abaffc4b9c32d0f045afced, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 1
+    pitchRandomness: 0.1
+    isMusic: 0
+    source: {fileID: 0}
+  - id: DefendUse
+    clip: {fileID: 8300000, guid: dbe7fe274d5c88e45954caeccabdb996, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - id: EnemyTrigger
+    clip: {fileID: 8300000, guid: 38f087e453eebc94192ff0480391d1ba, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - id: Checkmark
+    clip: {fileID: 8300000, guid: 884c4552e02542144a5924bf4f4931e5, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0
+    isMusic: 0
+    source: {fileID: 0}
 --- !u!1 &1673743346
 GameObject:
   m_ObjectHideFlags: 0
@@ -16934,6 +17073,10 @@ PrefabInstance:
     - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: possibleDrops.Array.data[1].weight
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805907478139619354, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8235641399303554090, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: m_LocalPosition.x
