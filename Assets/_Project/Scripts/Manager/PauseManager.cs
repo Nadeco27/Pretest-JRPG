@@ -94,7 +94,6 @@ public class PauseManager : MonoBehaviour
         isPaused = false;
         
         Time.timeScale = 1f;
-        AudioManager.Instance.Play("ButtonClick");
         
         if (pauseUI != null) pauseUI.Hide(false);
         if (settingsPanel != null) settingsPanel.SetActive(false);
@@ -103,20 +102,17 @@ public class PauseManager : MonoBehaviour
     public void OpenSettings()
     {
         if (settingsPanel != null) settingsPanel.SetActive(true);
-        AudioManager.Instance.Play("ButtonClick");
     }
 
     public void CloseSettings()
     {
         if (settingsPanel != null) settingsPanel.SetActive(false);
-        AudioManager.Instance.Play("ButtonClick");
     }
 
     public void QuitToMainMenu(string mainMenuSceneName)
     {
         Time.timeScale = 1f; 
         isPaused = false;
-        AudioManager.Instance.Play("ButtonClick");
 
         Debug.Log("[PauseManager] Returning to Main Menu...");
         

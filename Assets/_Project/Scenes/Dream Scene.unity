@@ -382,8 +382,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2919,8 +2919,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2984,6 +2984,7 @@ GameObject:
   - component: {fileID: 661877814}
   - component: {fileID: 661877813}
   - component: {fileID: 661877812}
+  - component: {fileID: 661877815}
   m_Layer: 0
   m_Name: CloseButton
   m_TagString: Untagged
@@ -3075,7 +3076,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 649223268058989734, guid: 3802ec78fd2ff3d4caa52877978049ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c916965b743a3d43b62d368273792b5, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3093,6 +3094,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 661877810}
   m_CullTransparentMesh: 1
+--- !u!114 &661877815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661877810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &743638711
 GameObject:
   m_ObjectHideFlags: 0
@@ -3260,8 +3278,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3512,6 +3530,7 @@ GameObject:
   - component: {fileID: 837051032}
   - component: {fileID: 837051031}
   - component: {fileID: 837051030}
+  - component: {fileID: 837051033}
   m_Layer: 0
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -3603,7 +3622,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 649223268058989734, guid: 3802ec78fd2ff3d4caa52877978049ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c916965b743a3d43b62d368273792b5, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3621,6 +3640,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837051028}
   m_CullTransparentMesh: 1
+--- !u!114 &837051033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837051028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &842412819
 GameObject:
   m_ObjectHideFlags: 0
@@ -5440,6 +5476,7 @@ GameObject:
   - component: {fileID: 1077304425}
   - component: {fileID: 1077304424}
   - component: {fileID: 1077304423}
+  - component: {fileID: 1077304426}
   m_Layer: 0
   m_Name: ExitButton
   m_TagString: Untagged
@@ -5531,7 +5568,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 649223268058989734, guid: 3802ec78fd2ff3d4caa52877978049ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c916965b743a3d43b62d368273792b5, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5549,6 +5586,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1077304421}
   m_CullTransparentMesh: 1
+--- !u!114 &1077304426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077304421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &1091185519
 GameObject:
   m_ObjectHideFlags: 0
@@ -5907,7 +5961,7 @@ MonoBehaviour:
     isMusic: 0
     source: {fileID: 0}
   - id: ButtonClick
-    clip: {fileID: 8300000, guid: 1183a47b05f1c6a4dbf8fc8ee2d27c25, type: 3}
+    clip: {fileID: 8300000, guid: 042e2ac5989573745bb018c06f0019d8, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -6003,6 +6057,15 @@ MonoBehaviour:
     loop: 0
     randomizePitch: 0
     pitchRandomness: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - id: ButtonHover
+    clip: {fileID: 8300000, guid: 667335ec9b558ce43bfcd4d21b35143a, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0.1
     isMusic: 0
     source: {fileID: 0}
 --- !u!4 &1219176796
@@ -6929,7 +6992,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Volume Settngs
+  m_text: Volume Settings
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c4f9beed18d7b8b41b8f9dcf0d934f63, type: 2}
   m_sharedMaterial: {fileID: -5112510553675794719, guid: c4f9beed18d7b8b41b8f9dcf0d934f63, type: 2}
@@ -7096,6 +7159,7 @@ GameObject:
   - component: {fileID: 1385681190}
   - component: {fileID: 1385681189}
   - component: {fileID: 1385681188}
+  - component: {fileID: 1385681191}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -7216,6 +7280,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1385681186}
   m_CullTransparentMesh: 1
+--- !u!114 &1385681191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385681186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &1435779810
 GameObject:
   m_ObjectHideFlags: 0
@@ -7485,8 +7566,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8011,6 +8092,7 @@ GameObject:
   - component: {fileID: 1583245035}
   - component: {fileID: 1583245034}
   - component: {fileID: 1583245033}
+  - component: {fileID: 1583245036}
   m_Layer: 0
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -8102,7 +8184,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 649223268058989734, guid: 3802ec78fd2ff3d4caa52877978049ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c916965b743a3d43b62d368273792b5, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8120,6 +8202,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1583245031}
   m_CullTransparentMesh: 1
+--- !u!114 &1583245036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583245031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &1594661166
 GameObject:
   m_ObjectHideFlags: 0
@@ -9573,6 +9672,7 @@ GameObject:
   - component: {fileID: 1947870465}
   - component: {fileID: 1947870464}
   - component: {fileID: 1947870463}
+  - component: {fileID: 1947870466}
   m_Layer: 5
   m_Name: BackpackButton
   m_TagString: Untagged
@@ -9682,6 +9782,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1947870461}
   m_CullTransparentMesh: 1
+--- !u!114 &1947870466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947870461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &1986255676
 GameObject:
   m_ObjectHideFlags: 0

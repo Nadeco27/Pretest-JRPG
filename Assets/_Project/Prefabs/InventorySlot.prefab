@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 5354554137100146838}
   - component: {fileID: 81881399056086150}
   - component: {fileID: 4273934347392442720}
+  - component: {fileID: 3861392282478639501}
   m_Layer: 5
   m_Name: InventorySlot
   m_TagString: Untagged
@@ -340,6 +341,23 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &3861392282478639501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2255108668865720711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &4968158355307928738
 GameObject:
   m_ObjectHideFlags: 0

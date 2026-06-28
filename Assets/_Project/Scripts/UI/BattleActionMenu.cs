@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
 {
@@ -308,40 +309,55 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
     {
         if (activeSubMenu != null)
         {
-            SafeFade(activeSubMenu, 0f, false);
+            AnimateSubMenu(activeSubMenu, 0f, 0.8f, false);
             activeSubMenu = null;
         }
     }
 
-    private void SafeFade(CanvasGroup cg, float targetAlpha, bool interactable)
+    public void AnimateSubMenu(CanvasGroup cg, float targetAlpha, float targetScale, bool isInteractable)
     {
-        StartCoroutine(FadeRoutine(cg, targetAlpha, interactable));
-    }
+        cg.DOKill();
+        cg.transform.DOKill();
 
-    private IEnumerator FadeRoutine(CanvasGroup cg, float targetAlpha, bool interactable)
-    {
-        float startAlpha = cg.alpha;
-        float timeElapsed = 0f;
-
-        if (!interactable)
+        // Enforce interaction flags before transition fires
+        if (!isInteractable)
         {
             cg.interactable = false;
             cg.blocksRaycasts = false;
         }
 
-        while (timeElapsed < fadeDuration)
-        {
-            timeElapsed += Time.deltaTime;
-            cg.alpha = Mathf.Lerp(startAlpha, targetAlpha, timeElapsed / fadeDuration);
-            yield return null;
-        }
+        // Run Fade Alpha and Scale transformation simultaneously
+        cg.DOFade(targetAlpha, fadeDuration).SetEase(Ease.OutQuad);
+        
+        cg.transform.DOScale(Vector3.one * targetScale, fadeDuration)
+            .SetEase(isInteractable ? Ease.OutBack : Ease.OutQuad)
+            .OnComplete(() =>
+            {
+                // Re-enable interactive properties only when opening transition finishes completely
+                if (isInteractable)
+                {
+                    cg.interactable = true;
+                    cg.blocksRaycasts = true;
+                }
+            });
+    }
 
-        cg.alpha = targetAlpha;
-        if (interactable)
+    public void TriggerCancelJuice()
+    {
+        // Shake main menu position slightly to indicate a successful cancel command
+        mainCanvasGroup.transform.DOKill(true);
+        mainCanvasGroup.transform.DOShakePosition(0.12f, new Vector3(10f, 0f, 0f), 10, 90, false, true);
+        
+        if (AudioManager.Instance != null)
         {
-            cg.interactable = true;
-            cg.blocksRaycasts = true;
+            AudioManager.Instance.Play("ButtonClick");
         }
+    }
+
+    private void SafeFade(CanvasGroup cg, float targetAlpha, bool interactable)
+    {
+        float targetScale = interactable ? 1f : 0.8f;
+        AnimateSubMenu(cg, targetAlpha, targetScale, interactable);
     }
 
     private IEnumerator ItemCooldownRoutine()

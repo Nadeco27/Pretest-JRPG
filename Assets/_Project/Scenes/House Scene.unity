@@ -337,6 +337,7 @@ GameObject:
   - component: {fileID: 50672580}
   - component: {fileID: 50672579}
   - component: {fileID: 50672578}
+  - component: {fileID: 50672581}
   m_Layer: 0
   m_Name: ExitButton
   m_TagString: Untagged
@@ -428,7 +429,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 649223268058989734, guid: 3802ec78fd2ff3d4caa52877978049ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c916965b743a3d43b62d368273792b5, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -446,6 +447,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 50672576}
   m_CullTransparentMesh: 1
+--- !u!114 &50672581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50672576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &54707044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,6 +1290,7 @@ GameObject:
   - component: {fileID: 124206939}
   - component: {fileID: 124206938}
   - component: {fileID: 124206937}
+  - component: {fileID: 124206940}
   m_Layer: 0
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -1363,7 +1382,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 649223268058989734, guid: 3802ec78fd2ff3d4caa52877978049ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c916965b743a3d43b62d368273792b5, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1381,6 +1400,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124206935}
   m_CullTransparentMesh: 1
+--- !u!114 &124206940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124206935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &135563759
 GameObject:
   m_ObjectHideFlags: 0
@@ -3923,6 +3959,7 @@ GameObject:
   - component: {fileID: 665867744}
   - component: {fileID: 665867743}
   - component: {fileID: 665867742}
+  - component: {fileID: 665867745}
   m_Layer: 5
   m_Name: BackpackButton
   m_TagString: Untagged
@@ -4032,6 +4069,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 665867740}
   m_CullTransparentMesh: 1
+--- !u!114 &665867745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665867740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &725124467
 GameObject:
   m_ObjectHideFlags: 0
@@ -4235,6 +4289,7 @@ GameObject:
   - component: {fileID: 761638876}
   - component: {fileID: 761638875}
   - component: {fileID: 761638874}
+  - component: {fileID: 761638877}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -4355,6 +4410,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 761638872}
   m_CullTransparentMesh: 1
+--- !u!114 &761638877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761638872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &803606775
 GameObject:
   m_ObjectHideFlags: 0
@@ -6996,7 +7068,7 @@ PrefabInstance:
       objectReference: {fileID: 1927165761}
     - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: possibleDrops.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: possibleDrops.Array.data[0].item
@@ -7009,10 +7081,14 @@ PrefabInstance:
     - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: possibleDrops.Array.data[2].item
       value: 
+      objectReference: {fileID: 11400000, guid: c85420c4c53fd4744be9b723abc4ef9d, type: 2}
+    - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+      propertyPath: possibleDrops.Array.data[3].item
+      value: 
       objectReference: {fileID: 11400000, guid: 2d69e21899d082e41a2f31240a087446, type: 2}
     - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: possibleDrops.Array.data[0].weight
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: possibleDrops.Array.data[1].weight
@@ -7020,7 +7096,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: possibleDrops.Array.data[2].weight
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+      propertyPath: possibleDrops.Array.data[3].weight
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7805907478139619354, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: m_SortingOrder
@@ -8291,8 +8371,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -9010,6 +9090,7 @@ GameObject:
   - component: {fileID: 1469318763}
   - component: {fileID: 1469318762}
   - component: {fileID: 1469318761}
+  - component: {fileID: 1469318764}
   m_Layer: 0
   m_Name: CloseButton
   m_TagString: Untagged
@@ -9101,7 +9182,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 649223268058989734, guid: 3802ec78fd2ff3d4caa52877978049ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c916965b743a3d43b62d368273792b5, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9119,6 +9200,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1469318759}
   m_CullTransparentMesh: 1
+--- !u!114 &1469318764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469318759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &1471389503
 GameObject:
   m_ObjectHideFlags: 0
@@ -10177,7 +10275,7 @@ MonoBehaviour:
     isMusic: 0
     source: {fileID: 0}
   - id: ButtonClick
-    clip: {fileID: 8300000, guid: 1183a47b05f1c6a4dbf8fc8ee2d27c25, type: 3}
+    clip: {fileID: 8300000, guid: 042e2ac5989573745bb018c06f0019d8, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -10266,13 +10364,22 @@ MonoBehaviour:
     pitchRandomness: 0
     isMusic: 0
     source: {fileID: 0}
-  - id: FailBuzzz
+  - id: FailBuzz
     clip: {fileID: 8300000, guid: 510ff1b9bd80afe448207d52e10d700d, type: 3}
     volume: 0.8
     pitch: 1
     loop: 0
     randomizePitch: 0
     pitchRandomness: 0
+    isMusic: 0
+    source: {fileID: 0}
+  - id: ButtonHover
+    clip: {fileID: 8300000, guid: 667335ec9b558ce43bfcd4d21b35143a, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0.1
     isMusic: 0
     source: {fileID: 0}
 --- !u!1 &1673743346
@@ -10425,6 +10532,7 @@ GameObject:
   - component: {fileID: 1686015665}
   - component: {fileID: 1686015664}
   - component: {fileID: 1686015663}
+  - component: {fileID: 1686015666}
   m_Layer: 0
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -10516,7 +10624,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 649223268058989734, guid: 3802ec78fd2ff3d4caa52877978049ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c916965b743a3d43b62d368273792b5, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10534,6 +10642,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686015661}
   m_CullTransparentMesh: 1
+--- !u!114 &1686015666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686015661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &1687962354
 GameObject:
   m_ObjectHideFlags: 0
@@ -10620,8 +10745,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10847,8 +10972,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10957,7 +11082,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Volume Settngs
+  m_text: Volume Settings
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c4f9beed18d7b8b41b8f9dcf0d934f63, type: 2}
   m_sharedMaterial: {fileID: -5112510553675794719, guid: c4f9beed18d7b8b41b8f9dcf0d934f63, type: 2}
@@ -12438,8 +12563,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -17229,7 +17354,7 @@ PrefabInstance:
       objectReference: {fileID: 1927165761}
     - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: possibleDrops.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: possibleDrops.Array.data[0].item
@@ -17240,11 +17365,27 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: abdc20cd9ffb09c45b6a737ede4d2a8f, type: 2}
     - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+      propertyPath: possibleDrops.Array.data[2].item
+      value: 
+      objectReference: {fileID: 11400000, guid: c85420c4c53fd4744be9b723abc4ef9d, type: 2}
+    - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+      propertyPath: possibleDrops.Array.data[3].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 4cd893319d6f76746b7085173f834339, type: 2}
+    - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: possibleDrops.Array.data[0].weight
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: possibleDrops.Array.data[1].weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+      propertyPath: possibleDrops.Array.data[2].weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+      propertyPath: possibleDrops.Array.data[3].weight
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7805907478139619354, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}

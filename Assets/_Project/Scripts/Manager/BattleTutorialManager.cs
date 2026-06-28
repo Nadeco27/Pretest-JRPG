@@ -90,7 +90,24 @@ public class BattleTutorialManager : MonoBehaviour
 
         pageIndicatorText.text = $"{currentPageIndex + 1}/{tutorialPages.Count}";
 
-        prevButton.gameObject.SetActive(currentPageIndex > 0);
+        CanvasGroup prevCG = prevButton.GetComponent<CanvasGroup>();
+        if (prevCG == null) 
+        {
+            prevCG = prevButton.gameObject.AddComponent<CanvasGroup>();
+        }
+
+        if (currentPageIndex > 0)
+        {
+            prevButton.interactable = true;
+            prevCG.alpha = 1f;
+            prevCG.blocksRaycasts = true;
+        }
+        else
+        {
+            prevButton.interactable = false;
+            prevCG.alpha = 0f;
+            prevCG.blocksRaycasts = false;
+        }
 
         if (currentPageIndex == tutorialPages.Count - 1)
         {
@@ -104,7 +121,6 @@ public class BattleTutorialManager : MonoBehaviour
 
     private void OnNextButtonClicked()
     {
-        AudioManager.Instance.Play("ButtonClick");
         if (currentPageIndex < tutorialPages.Count - 1)
         {
             currentPageIndex++;
@@ -119,7 +135,6 @@ public class BattleTutorialManager : MonoBehaviour
 
     private void OnPrevButtonClicked()
     {
-        AudioManager.Instance.Play("ButtonClick");
         if (currentPageIndex > 0)
         {
             currentPageIndex--;

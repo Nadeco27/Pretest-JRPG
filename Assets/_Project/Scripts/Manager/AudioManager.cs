@@ -81,6 +81,8 @@ public class AudioManager : MonoBehaviour
     {
         if (soundDictionary.TryGetValue(id, out Sound s))
         {
+            s.source.volume = s.volume;
+            
             if (s.randomizePitch)
             {
                 s.source.pitch = s.pitch + Random.Range(-s.pitchRandomness, s.pitchRandomness);
@@ -91,7 +93,15 @@ public class AudioManager : MonoBehaviour
                 s.source.pitch = s.pitch;
             }
             
-            s.source.Play();
+            if (s.loop)
+            {
+                // If audio is looped, use normal play
+                s.source.Play();
+            }
+            else
+            {
+                s.source.PlayOneShot(s.clip);
+            }
         }
         else
         {

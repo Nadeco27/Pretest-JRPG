@@ -505,7 +505,7 @@ MonoBehaviour:
   m_text: Next
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e553ae0596eee6448b8bb99a0b687914, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 467687520706674286, guid: e553ae0596eee6448b8bb99a0b687914, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -529,8 +529,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -571,7 +571,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &53158277
@@ -908,6 +908,9 @@ MonoBehaviour:
   storedInventoryItem:
     data: {fileID: 0}
     quantity: 0
+  textRectTransform: {fileID: 84854410}
+  textIndentOffset: 15
+  textAnimationSpeed: 0.1
 --- !u!1 &137533196
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,6 +959,7 @@ GameObject:
   - component: {fileID: 145258040}
   - component: {fileID: 145258039}
   - component: {fileID: 145258038}
+  - component: {fileID: 145258041}
   m_Layer: 0
   m_Name: CloseButton
   m_TagString: Untagged
@@ -1047,7 +1051,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 649223268058989734, guid: 3802ec78fd2ff3d4caa52877978049ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c916965b743a3d43b62d368273792b5, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1065,6 +1069,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145258036}
   m_CullTransparentMesh: 1
+--- !u!114 &145258041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145258036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &177076606
 GameObject:
   m_ObjectHideFlags: 0
@@ -2157,6 +2178,9 @@ MonoBehaviour:
   storedInventoryItem:
     data: {fileID: 0}
     quantity: 0
+  textRectTransform: {fileID: 286895366}
+  textIndentOffset: 15
+  textAnimationSpeed: 0.1
 --- !u!1 &289883357
 GameObject:
   m_ObjectHideFlags: 0
@@ -2354,7 +2378,7 @@ MonoBehaviour:
   m_text: This is the tutorial text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e553ae0596eee6448b8bb99a0b687914, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 467687520706674286, guid: e553ae0596eee6448b8bb99a0b687914, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2420,7 +2444,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &315593063
@@ -2571,6 +2595,9 @@ MonoBehaviour:
   storedInventoryItem:
     data: {fileID: 0}
     quantity: 0
+  textRectTransform: {fileID: 318522663}
+  textIndentOffset: 15
+  textAnimationSpeed: 0.1
 --- !u!1 &320862958
 GameObject:
   m_ObjectHideFlags: 0
@@ -2927,6 +2954,7 @@ MonoBehaviour:
   intelligence: 2
   resistance: 0
   unitHUD: {fileID: 820552424}
+  vignetteController: {fileID: 1689416882}
   isDefending: 0
   shieldVFXObject: {fileID: 2092419857}
 --- !u!114 &337174924
@@ -3458,7 +3486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &389403808
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3533,6 +3561,7 @@ GameObject:
   - component: {fileID: 413648340}
   - component: {fileID: 413648339}
   - component: {fileID: 413648338}
+  - component: {fileID: 413648341}
   m_Layer: 5
   m_Name: NextButton
   m_TagString: Untagged
@@ -3579,7 +3608,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -3624,8 +3653,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 649223268058989734, guid: 3802ec78fd2ff3d4caa52877978049ea, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 1c916965b743a3d43b62d368273792b5, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3642,6 +3671,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 413648336}
   m_CullTransparentMesh: 1
+--- !u!114 &413648341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413648336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &432612735
 GameObject:
   m_ObjectHideFlags: 0
@@ -4304,8 +4350,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4524,6 +4570,7 @@ GameObject:
   - component: {fileID: 566968626}
   - component: {fileID: 566968625}
   - component: {fileID: 566968628}
+  - component: {fileID: 566968629}
   m_Layer: 5
   m_Name: BtnAttack
   m_TagString: Untagged
@@ -4646,6 +4693,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3925134cbb8f0fd4bbc1cd7b6ccdd1c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RightClickDetector
+--- !u!114 &566968629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566968623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e6b26986a2c334086ce1d3effec9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleButtonJuice
+  hoverScaleAmount: 1.1
+  animationDuration: 0.15
+  hoverOverlay: {fileID: 0}
+  maxOverlayAlpha: 0.6
 --- !u!1 &571105988
 GameObject:
   m_ObjectHideFlags: 0
@@ -4930,8 +4993,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5753,6 +5816,9 @@ MonoBehaviour:
   storedInventoryItem:
     data: {fileID: 0}
     quantity: 0
+  textRectTransform: {fileID: 673083805}
+  textIndentOffset: 15
+  textAnimationSpeed: 0.1
 --- !u!1 &673358733
 GameObject:
   m_ObjectHideFlags: 0
@@ -6290,6 +6356,7 @@ GameObject:
   - component: {fileID: 737978354}
   - component: {fileID: 737978353}
   - component: {fileID: 737978352}
+  - component: {fileID: 737978355}
   m_Layer: 5
   m_Name: ActionButton
   m_TagString: Untagged
@@ -6381,7 +6448,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 649223268058989734, guid: 3802ec78fd2ff3d4caa52877978049ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c916965b743a3d43b62d368273792b5, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6399,6 +6466,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 737978350}
   m_CullTransparentMesh: 1
+--- !u!114 &737978355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737978350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &741804122
 GameObject:
   m_ObjectHideFlags: 0
@@ -6885,12 +6969,21 @@ MonoBehaviour:
     isMusic: 0
     source: {fileID: 0}
   - id: ButtonClick
-    clip: {fileID: 8300000, guid: 1183a47b05f1c6a4dbf8fc8ee2d27c25, type: 3}
+    clip: {fileID: 8300000, guid: 042e2ac5989573745bb018c06f0019d8, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     randomizePitch: 0
     pitchRandomness: 0.5
+    isMusic: 0
+    source: {fileID: 0}
+  - id: ButtonHover
+    clip: {fileID: 8300000, guid: 667335ec9b558ce43bfcd4d21b35143a, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    randomizePitch: 0
+    pitchRandomness: 0.1
     isMusic: 0
     source: {fileID: 0}
   - id: CardboardOpen
@@ -7194,7 +7287,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 877588697}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7205,7 +7298,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.000015258789, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &877588699
@@ -7301,7 +7394,7 @@ MonoBehaviour:
 
       4. <b>RES</b>: Affects your damage suffered from
       magic attack'
-    optionalImage: {fileID: 0}
+    optionalImage: {fileID: 21300000, guid: 814750d6593a31146bb0e6ed70417586, type: 3}
   - explanationText: 'To do actions in your turn, you can click in the coresponding
       menu. Some menu will have sub menu, and the controls are listed down below
       :
@@ -8088,6 +8181,7 @@ GameObject:
   - component: {fileID: 1013828698}
   - component: {fileID: 1013828697}
   - component: {fileID: 1013828700}
+  - component: {fileID: 1013828701}
   m_Layer: 5
   m_Name: BtnItem
   m_TagString: Untagged
@@ -8210,6 +8304,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3925134cbb8f0fd4bbc1cd7b6ccdd1c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RightClickDetector
+--- !u!114 &1013828701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013828695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e6b26986a2c334086ce1d3effec9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleButtonJuice
+  hoverScaleAmount: 1.1
+  animationDuration: 0.15
+  hoverOverlay: {fileID: 0}
+  maxOverlayAlpha: 0.6
 --- !u!1 &1014009780
 GameObject:
   m_ObjectHideFlags: 0
@@ -8223,6 +8333,7 @@ GameObject:
   - component: {fileID: 1014009783}
   - component: {fileID: 1014009782}
   - component: {fileID: 1014009785}
+  - component: {fileID: 1014009786}
   m_Layer: 5
   m_Name: BtnSkill
   m_TagString: Untagged
@@ -8345,6 +8456,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3925134cbb8f0fd4bbc1cd7b6ccdd1c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RightClickDetector
+--- !u!114 &1014009786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014009780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e6b26986a2c334086ce1d3effec9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleButtonJuice
+  hoverScaleAmount: 1.1
+  animationDuration: 0.15
+  hoverOverlay: {fileID: 0}
+  maxOverlayAlpha: 0.6
 --- !u!1 &1015713051
 GameObject:
   m_ObjectHideFlags: 0
@@ -8654,13 +8781,14 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1689416879}
   - {fileID: 731972652}
+  - {fileID: 641641883}
   - {fileID: 820552421}
   - {fileID: 1905886724}
   - {fileID: 389403808}
   - {fileID: 1876593780}
   - {fileID: 1301864143}
-  - {fileID: 641641883}
   - {fileID: 719221189}
   m_Father: {fileID: 1073682775}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9723,7 +9851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventoryDebug
   debugKey: 282
   itemsToInject:
-  - item: {fileID: 11400000, guid: 2d69e21899d082e41a2f31240a087446, type: 2}
+  - item: {fileID: 11400000, guid: c85420c4c53fd4744be9b723abc4ef9d, type: 2}
     amount: 5
   - item: {fileID: 11400000, guid: 4cd893319d6f76746b7085173f834339, type: 2}
     amount: 5
@@ -10042,6 +10170,9 @@ MonoBehaviour:
   storedInventoryItem:
     data: {fileID: 0}
     quantity: 0
+  textRectTransform: {fileID: 1115992310}
+  textIndentOffset: 15
+  textAnimationSpeed: 0.1
 --- !u!1 &1117302582
 GameObject:
   m_ObjectHideFlags: 0
@@ -10386,7 +10517,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Volume Settngs
+  m_text: Volume Settings
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c4f9beed18d7b8b41b8f9dcf0d934f63, type: 2}
   m_sharedMaterial: {fileID: -5112510553675794719, guid: c4f9beed18d7b8b41b8f9dcf0d934f63, type: 2}
@@ -10526,7 +10657,7 @@ MonoBehaviour:
   m_text: 1/6
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e553ae0596eee6448b8bb99a0b687914, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 467687520706674286, guid: e553ae0596eee6448b8bb99a0b687914, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10592,7 +10723,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1161829076
@@ -11156,6 +11287,9 @@ MonoBehaviour:
   storedInventoryItem:
     data: {fileID: 0}
     quantity: 0
+  textRectTransform: {fileID: 1197132166}
+  textIndentOffset: 15
+  textAnimationSpeed: 0.1
 --- !u!1 &1200059787
 GameObject:
   m_ObjectHideFlags: 0
@@ -11353,6 +11487,7 @@ GameObject:
   - component: {fileID: 1232935674}
   - component: {fileID: 1232935673}
   - component: {fileID: 1232935672}
+  - component: {fileID: 1232935675}
   m_Layer: 0
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -11444,7 +11579,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 649223268058989734, guid: 3802ec78fd2ff3d4caa52877978049ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c916965b743a3d43b62d368273792b5, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11462,6 +11597,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232935670}
   m_CullTransparentMesh: 1
+--- !u!114 &1232935675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232935670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &1296858446
 GameObject:
   m_ObjectHideFlags: 0
@@ -11474,6 +11626,7 @@ GameObject:
   - component: {fileID: 1296858450}
   - component: {fileID: 1296858449}
   - component: {fileID: 1296858448}
+  - component: {fileID: 1296858451}
   m_Layer: 5
   m_Name: PrevButton
   m_TagString: Untagged
@@ -11520,7 +11673,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -11565,8 +11718,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 649223268058989734, guid: 3802ec78fd2ff3d4caa52877978049ea, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 1c916965b743a3d43b62d368273792b5, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -11583,6 +11736,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296858446}
   m_CullTransparentMesh: 1
+--- !u!114 &1296858451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296858446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &1301864142
 GameObject:
   m_ObjectHideFlags: 0
@@ -12801,8 +12971,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12866,6 +13036,7 @@ GameObject:
   - component: {fileID: 1553380600}
   - component: {fileID: 1553380599}
   - component: {fileID: 1553380598}
+  - component: {fileID: 1553380601}
   m_Layer: 0
   m_Name: ExitButton
   m_TagString: Untagged
@@ -12957,7 +13128,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 649223268058989734, guid: 3802ec78fd2ff3d4caa52877978049ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c916965b743a3d43b62d368273792b5, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12975,6 +13146,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1553380596}
   m_CullTransparentMesh: 1
+--- !u!114 &1553380601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1553380596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &1560875300
 GameObject:
   m_ObjectHideFlags: 0
@@ -14263,6 +14451,9 @@ MonoBehaviour:
   storedInventoryItem:
     data: {fileID: 0}
     quantity: 0
+  textRectTransform: {fileID: 1640274124}
+  textIndentOffset: 15
+  textAnimationSpeed: 0.1
 --- !u!1 &1643011904
 GameObject:
   m_ObjectHideFlags: 0
@@ -15033,6 +15224,96 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689316753}
   m_CullTransparentMesh: 1
+--- !u!1 &1689416878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1689416879}
+  - component: {fileID: 1689416881}
+  - component: {fileID: 1689416880}
+  - component: {fileID: 1689416882}
+  m_Layer: 5
+  m_Name: BloodVignetteUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1689416879
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689416878}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1024875089}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1689416880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689416878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 2100000, guid: 3bca8e56b0b9d204e9b4cf697d2017ba, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1689416881
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689416878}
+  m_CullTransparentMesh: 1
+--- !u!114 &1689416882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689416878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a22ef2758947843b841d632b6d44e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthVignetteController
+  vignetteImage: {fileID: 1689416880}
+  activationThreshold: 0.4
 --- !u!1 &1693732917
 GameObject:
   m_ObjectHideFlags: 0
@@ -21086,7 +21367,7 @@ MonoBehaviour:
   m_text: Previous
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e553ae0596eee6448b8bb99a0b687914, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 467687520706674286, guid: e553ae0596eee6448b8bb99a0b687914, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -21110,8 +21391,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -21152,7 +21433,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1860549160
@@ -22272,8 +22553,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -22612,6 +22893,7 @@ GameObject:
   - component: {fileID: 2008693395}
   - component: {fileID: 2008693394}
   - component: {fileID: 2008693393}
+  - component: {fileID: 2008693396}
   m_Layer: 0
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -22703,7 +22985,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 649223268058989734, guid: 3802ec78fd2ff3d4caa52877978049ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c916965b743a3d43b62d368273792b5, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -22721,6 +23003,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008693391}
   m_CullTransparentMesh: 1
+--- !u!114 &2008693396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008693391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c3b225afa2b7e48a2adab1ef5131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonJuice
+  hoverScale: 1.1
+  clickScale: 0.9
+  animationDuration: 0.25
+  swayAmount: 10
+  swayVibrato: 5
 --- !u!1 &2017105781
 GameObject:
   m_ObjectHideFlags: 0
@@ -22861,6 +23160,9 @@ MonoBehaviour:
   storedInventoryItem:
     data: {fileID: 0}
     quantity: 0
+  textRectTransform: {fileID: 2017105782}
+  textIndentOffset: 15
+  textAnimationSpeed: 0.1
 --- !u!1 &2031110507
 GameObject:
   m_ObjectHideFlags: 0
@@ -23007,6 +23309,7 @@ MonoBehaviour:
   intelligence: 2
   resistance: 0
   unitHUD: {fileID: 1905886727}
+  vignetteController: {fileID: 0}
   isDefending: 0
   shieldVFXObject: {fileID: 1806087040}
 --- !u!114 &2031110514

@@ -185,10 +185,14 @@ public class BattleManager : MonoBehaviour
         if (diamondActionMenuParent != null) diamondActionMenuParent.SetActive(false);
         if (BattleInfoPanel.Instance != null) BattleInfoPanel.Instance.StopTimer();
 
-        AudioManager.Instance.Play("BattleWin");
-
         // Slow motion effect
         Time.timeScale = 0.3f;
+        yield return new WaitForSecondsRealtime(1.5f);
+
+        AudioManager.Instance.Play("BattleWin");
+
+        // Restore normal time scale
+        Time.timeScale = 1f;
 
         GameObject enemyObj = GameObject.FindGameObjectWithTag("Enemy");
         if (enemyObj != null)
@@ -199,8 +203,6 @@ public class BattleManager : MonoBehaviour
                 yield return StartCoroutine(visualController.FadeOutRoutine(0.5f));
             }
         }
-
-        Time.timeScale = 1f;
 
         if (resultTitleText != null) resultTitleText.text = "YOU WIN";
         if (actionButtonText != null) actionButtonText.text = "Continue";

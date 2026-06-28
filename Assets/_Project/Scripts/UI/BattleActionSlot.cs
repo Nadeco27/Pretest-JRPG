@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using DG.Tweening;
 
 [RequireComponent(typeof(Button))]
 public class BattleActionSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
@@ -14,12 +15,21 @@ public class BattleActionSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [HideInInspector] public ItemData linkedItem;
     [HideInInspector] public InventoryItem storedInventoryItem;
 
+    [Header("Sub-Menu UI Juice Settings")]
+    [SerializeField] private RectTransform textRectTransform;
+    [SerializeField] private float textIndentOffset = 15f;
+    [SerializeField] private float textAnimationSpeed = 0.1f;
+
     private Button btn;
     private BattleUnit playerUnit;
     private TextMeshProUGUI buttonText;
+    private Vector2 originalTextPosition;
+    private Vector3 originalSlotScale;
 
     private void Awake()
     {
+        originalSlotScale = transform.localScale;
+
         btn = GetComponent<Button>();
         buttonText = GetComponentInChildren<TextMeshProUGUI>();
         
@@ -34,6 +44,17 @@ public class BattleActionSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
         if (linkedAction != null && buttonText != null)
         {
             buttonText.text = linkedAction.actionName;
+        }
+
+        // Save button original position
+        if (textRectTransform != null)
+        {
+            originalTextPosition = textRectTransform.anchoredPosition;
+        }
+        else if (buttonText != null)
+        {
+            textRectTransform = buttonText.GetComponent<RectTransform>();
+            originalTextPosition = textRectTransform.anchoredPosition;
         }
     }
 
@@ -58,17 +79,49 @@ public class BattleActionSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (btn != null && !btn.interactable) return;
+        
+        if (!HasEnoughStats()) return; 
+
+        if (textRectTransform != null)
+        {
+            textRectTransform.DOKill();
+            textRectTransform.DOAnchorPos(new Vector2(originalTextPosition.x + textIndentOffset, originalTextPosition.y), textAnimationSpeed).SetEase(Ease.OutCubic);
+        }
+
+        transform.DOKill();
+        transform.DOScale(originalSlotScale * 1.05f, textAnimationSpeed).SetEase(Ease.OutQuad);
+
+        if (AudioManager.Instance != null) AudioManager.Instance.Play("ButtonHover");
+
         RefreshTooltipUI();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        transform.DOKill();
         if (DynamicTooltip.Instance != null) DynamicTooltip.Instance.HideTooltip();
+        if (textRectTransform != null) textRectTransform.DOKill();
+
+        // Set text and button to original position
+        transform.DOScale(originalSlotScale, textAnimationSpeed).SetEase(Ease.OutQuad);
+        if (textRectTransform != null)
+        {
+            textRectTransform.DOAnchorPos(originalTextPosition, textAnimationSpeed).SetEase(Ease.OutQuad);
+        }
     }
 
     private void OnDisable()
     {
         if (DynamicTooltip.Instance != null) DynamicTooltip.Instance.HideTooltip();
+        transform.DOKill();
+        if (textRectTransform != null) textRectTransform.DOKill();
+        
+        transform.localScale = originalSlotScale;
+        if (textRectTransform != null && originalTextPosition != Vector2.zero) 
+        {
+            textRectTransform.anchoredPosition = originalTextPosition;
+        }
     }
 
     private void OnSlotClicked()
@@ -78,7 +131,10 @@ public class BattleActionSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
             if (WarningMessageUI.Instance != null) WarningMessageUI.Instance.ShowWarning("Cannot afford cost of action");
             return; 
         }
-        
+
+        transform.DOKill();
+        transform.DOPunchScale(new Vector3(-0.05f, -0.05f, 0f), 0.1f, 5, 1f);
+
         if (BattleActionMenu.Instance != null) 
         {
             BattleActionMenu.Instance.ReceiveActionClick(this);

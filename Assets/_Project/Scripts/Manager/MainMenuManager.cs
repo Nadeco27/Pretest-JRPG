@@ -70,7 +70,6 @@ public class MainMenuManager : MonoBehaviour
     {
         // Prevent spam clicking
         startButton.interactable = false;
-        AudioManager.Instance.Play("ButtonClick");
 
         ResetProgressionData();
 
@@ -105,19 +104,16 @@ public class MainMenuManager : MonoBehaviour
 
     private void OpenSettings()
     {
-        AudioManager.Instance.Play("ButtonClick");
         settingsPanel.SetActive(true);
     }
 
     private void CloseSettings()
     {
-        AudioManager.Instance.Play("ButtonClick");
         settingsPanel.SetActive(false);
     }
 
     private void ExitGame()
     {
-        AudioManager.Instance.Play("ButtonClick");
         exitButton.interactable = false;
 
         if (ScreenTransitionManager.Instance != null)

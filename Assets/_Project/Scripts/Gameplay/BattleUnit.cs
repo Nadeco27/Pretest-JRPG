@@ -41,6 +41,8 @@ public class BattleUnit : MonoBehaviour
 
     [Header("Visual UI Connection")]
     [SerializeField] private BattleHUD unitHUD;
+    [Tooltip("Player health vignette")]
+    public HealthVignetteController vignetteController;
 
     [Header("Defend System")]
     public bool isDefending = false;
@@ -62,7 +64,12 @@ public class BattleUnit : MonoBehaviour
     private void Start()
     {
         UpdateVisualHUD();
-        if (shieldVFXObject != null) shieldVFXObject.SetActive(false); 
+        if (shieldVFXObject != null) shieldVFXObject.SetActive(false);
+
+        if (isPlayerUnit && vignetteController != null)
+        {
+            vignetteController.UpdateVignette(currentHP, maxHP);
+        }
     }
 
     public void RecalculateStats()
@@ -94,11 +101,14 @@ public class BattleUnit : MonoBehaviour
 
         UpdateVisualHUD();
 
+        if (isPlayerUnit && vignetteController != null)
+        {
+            vignetteController.UpdateVignette(currentHP, maxHP);
+        }
         if (!isPlayerUnit && BattleCutsceneManager.Instance != null)
         {
             BattleCutsceneManager.Instance.CheckEnemyHealthThreshold(currentHP);
         }
-
         if (AudioManager.Instance != null)
         {
             if (isDefending)
@@ -159,6 +169,11 @@ public class BattleUnit : MonoBehaviour
         {
             currentHP -= amount;
             currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+
+            if (isPlayerUnit && vignetteController != null)
+            {
+                vignetteController.UpdateVignette(currentHP, maxHP);
+            }
         }
         UpdateVisualHUD();
     }
@@ -185,6 +200,11 @@ public class BattleUnit : MonoBehaviour
             if (unitHUD != null) unitHUD.TriggerStatHighlight("HP");
             Debug.Log($"[{unitName}] Restored {item.healAmount} HP.");
             hasHUDChanged = true;
+
+            if (isPlayerUnit && vignetteController != null)
+            {
+                vignetteController.UpdateVignette(currentHP, maxHP);
+            }
         }
 
         if (item.manaRestoreAmount > 0)
@@ -298,6 +318,11 @@ public class BattleUnit : MonoBehaviour
             currentHP = Mathf.Min(currentHP + action.selfHealAmount, maxHP);
             if (unitHUD != null) unitHUD.TriggerStatHighlight("HP");
             Debug.Log($"[{unitName}] Healed {action.selfHealAmount} HP from action effect.");
+
+            if (isPlayerUnit && vignetteController != null)
+            {
+                vignetteController.UpdateVignette(currentHP, maxHP);
+            }
         }
 
         if (action.selfManaRestoreAmount > 0)
