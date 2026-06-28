@@ -57,6 +57,9 @@ public class PauseManager : MonoBehaviour
             if (InventoryManager.Instance != null && InventoryManager.Instance.isDialogueActive) return;
             if (BattleFungusHelper.isMidBattleDialogueActive) return;
 
+            // Do not overlap Esc input when closing backpack UI
+            if (InventoryManager.Instance != null && InventoryManager.Instance.IsBackpackOpen()) return;
+
             if (isPaused)
             {
                 // When settings open, Esc button will close setting, then the pause

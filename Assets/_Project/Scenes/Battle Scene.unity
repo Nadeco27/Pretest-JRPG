@@ -23122,7 +23122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78a6f171985405545b17d8f65d93802a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
-  thinkingDelay: 2
+  thinkingDelay: 1.5
   availableActions:
   - {fileID: 11400000, guid: e2a77f4f54fb2e14b817eb849ee00925, type: 2}
   - {fileID: 11400000, guid: 8dde5a78f4ee01740afbc7c2d18c5099, type: 2}
