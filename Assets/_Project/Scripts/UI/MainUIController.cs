@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class MainUIController : MonoBehaviour
@@ -42,6 +43,14 @@ public class MainUIController : MonoBehaviour
 
     public void EndDialogueUI()
     {
+        SetDialogueMode(false);
+        StartCoroutine(EndDialogueDelay());
+    }
+
+    private IEnumerator EndDialogueDelay()
+    {
+        // Add input delay to prevent input bleeding
+        yield return new WaitForSeconds(0.1f);
         SetDialogueMode(false);
     }
 }

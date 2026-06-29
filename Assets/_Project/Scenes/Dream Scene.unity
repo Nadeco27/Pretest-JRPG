@@ -4005,11 +4005,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: -27.221306, y: 58.42759}
+  scrollPos: {x: 320.39502, y: 30.554296}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 244
-  zoom: 0.88000005
+  zoom: 0.8200001
   scrollViewRect:
     serializedVersion: 2
     x: -343
@@ -4017,9 +4017,8 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 875353787}
-  selectedCommands:
-  - {fileID: 875353806}
+  - {fileID: 875353766}
+  selectedCommands: []
   variables: []
   description: 
   stepPause: 0
@@ -4728,7 +4727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Fungus::Fungus.Block
   nodeRect:
     serializedVersion: 2
-    x: 343.1304
+    x: 337.43933
     y: 127.55727
     width: 109.433334
     height: 40
@@ -4805,7 +4804,7 @@ MonoBehaviour:
   isMovementAllowed: 1
 --- !u!114 &875353805
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -4850,7 +4849,7 @@ MonoBehaviour:
   callMode: 0
 --- !u!114 &875353806
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}

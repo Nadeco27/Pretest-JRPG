@@ -22,7 +22,7 @@ public class LoadSceneTransitionCommand : Command
         }
         else
         {
-            Debug.LogWarning("ScreenTransitionManager tidak ditemukan di Scene! Melakukan load scene biasa.");
+            Debug.LogWarning("ScreenTransitionManager not found in scene! Using normal scene transition");
             UnityEngine.SceneManagement.SceneManager.LoadScene(targetSceneName);
         }
 

@@ -14511,7 +14511,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Delayed Revenge
+  m_text: ' Delayed Revenge'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e553ae0596eee6448b8bb99a0b687914, type: 2}
   m_sharedMaterial: {fileID: 467687520706674286, guid: e553ae0596eee6448b8bb99a0b687914, type: 2}

@@ -71,7 +71,8 @@ public class BattleManager : MonoBehaviour
     {
         // State queue system
         if (state == BattleState.BUSY_CUTSCENE && !isResolvingQueue && 
-            (newState == BattleState.PLAYERTURN || newState == BattleState.ENEMYTURN || newState == BattleState.WON || newState == BattleState.LOST))
+            (newState == BattleState.PLAYERTURN || newState == BattleState.ENEMYTURN ||
+            newState == BattleState.WON || newState == BattleState.LOST))
         {
             Debug.Log($"[BattleManager] Saving {newState} to queue because cutscene is currently running");
             pendingState = newState;

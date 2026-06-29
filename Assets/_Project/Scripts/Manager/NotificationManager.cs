@@ -10,7 +10,6 @@ public class NotificationManager : MonoBehaviour
 
     private void Awake()
     {
-        // Enforce Singleton architecture
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }

@@ -3086,9 +3086,17 @@ PrefabInstance:
       value: Cardboard Long
       objectReference: {fileID: 0}
     - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+      propertyPath: uniqueBoxId
+      value: Box_Living_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: dialogFlowchart
       value: 
       objectReference: {fileID: 1927165761}
+    - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+      propertyPath: sparkleParticle
+      value: 
+      objectReference: {fileID: 526750891}
     - target: {fileID: 8235641399303554090, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.3995795
@@ -3137,6 +3145,11 @@ PrefabInstance:
 --- !u!4 &526750890 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8235641399303554090, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+  m_PrefabInstance: {fileID: 526750889}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &526750891 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7523840490715937641, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
   m_PrefabInstance: {fileID: 526750889}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &531972246
@@ -7063,9 +7076,17 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+      propertyPath: uniqueBoxId
+      value: Box_Kitchen_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: dialogFlowchart
       value: 
       objectReference: {fileID: 1927165761}
+    - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+      propertyPath: sparkleParticle
+      value: 
+      objectReference: {fileID: 1183139219}
     - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: possibleDrops.Array.size
       value: 4
@@ -7154,6 +7175,11 @@ PrefabInstance:
 --- !u!4 &1183139218 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8235641399303554090, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+  m_PrefabInstance: {fileID: 1183139217}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1183139219 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7523840490715937641, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
   m_PrefabInstance: {fileID: 1183139217}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1216733275 stripped
@@ -12779,7 +12805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: -540.6671, y: 76.709435}
+  scrollPos: {x: -246.67805, y: 61.40885}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 244
@@ -12791,7 +12817,7 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 1927165884}
+  - {fileID: 1927165827}
   selectedCommands: []
   variables: []
   description: 
@@ -16195,7 +16221,7 @@ MonoBehaviour:
   setSayDialog: {fileID: 0}
 --- !u!114 &1927165900
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -16225,7 +16251,7 @@ MonoBehaviour:
   waitUntilFinished: 0
 --- !u!114 &1927165901
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -17349,9 +17375,17 @@ PrefabInstance:
       value: Cardboard Long
       objectReference: {fileID: 0}
     - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+      propertyPath: uniqueBoxId
+      value: Box_Bedroom_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: dialogFlowchart
       value: 
       objectReference: {fileID: 1927165761}
+    - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+      propertyPath: sparkleParticle
+      value: 
+      objectReference: {fileID: 1373226682511094094}
     - target: {fileID: 4710705516374684895, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
       propertyPath: possibleDrops.Array.size
       value: 4
@@ -17437,6 +17471,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+--- !u!198 &1373226682511094094 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7523840490715937641, guid: 0ae5560b00ab2f44c8e092eeaa6322d6, type: 3}
+  m_PrefabInstance: {fileID: 1373226682511094093}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

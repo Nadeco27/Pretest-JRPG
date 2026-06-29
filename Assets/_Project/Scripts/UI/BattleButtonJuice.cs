@@ -10,7 +10,6 @@ public class BattleButtonJuice : MonoBehaviour, IPointerEnterHandler, IPointerEx
     [SerializeField] private float animationDuration = 0.12f;
 
     [Header("Ghost Overlay Integration")]
-    [Tooltip("Assign aura GameObject behind the main action menu button")]
     [SerializeField] private CanvasGroup hoverOverlay;
     [SerializeField] private float maxOverlayAlpha = 0.6f;
 

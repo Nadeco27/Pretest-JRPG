@@ -126,7 +126,6 @@ public class UnitAnimator : MonoBehaviour
             Debug.LogWarning("CinemachineImpulseSource tidak ditemukan di GameObject: " + gameObject.name);
         }
 
-        // Memunculkan partikel darah jika ada
         if (bloodParticlePrefab != null) 
         {
             Instantiate(bloodParticlePrefab, targetTransform.position, Quaternion.identity);

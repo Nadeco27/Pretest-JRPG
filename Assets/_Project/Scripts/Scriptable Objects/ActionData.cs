@@ -1,6 +1,5 @@
 using UnityEngine;
 
-// Pindahkan enum ini ke sini agar bersifat global
 public enum ActionCostType { None, HP, MP }
 public enum ActionAnimationType { Melee, Ranged }
 public enum StatScaling { STR, INT }

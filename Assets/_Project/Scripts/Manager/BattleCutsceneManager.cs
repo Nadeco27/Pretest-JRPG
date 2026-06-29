@@ -22,7 +22,7 @@ public class BattleCutsceneManager : MonoBehaviour
     [Header("Fungus Integration")]
     [SerializeField] private Flowchart battleFlowchart;
 
-    [Header("Modular Dialogue Events")]
+    [Header("Dialogue Events")]
     [SerializeField] private List<HealthDialogueEvent> hpDialogueEvents = new List<HealthDialogueEvent>();
 
     private void Awake()
@@ -78,7 +78,7 @@ public class BattleCutsceneManager : MonoBehaviour
             if (BattleManager.Instance.hasPendingState)
             {
                 BattleState nextState = BattleManager.Instance.pendingState;
-                BattleManager.Instance.hasPendingState = false; // Reset antrean
+                BattleManager.Instance.hasPendingState = false; // Reset queue
                 
                 Debug.Log($"[Cutscene] Dialogue finished. Executing state from queue: {nextState}");
                 BattleManager.Instance.ChangeState(nextState, true);

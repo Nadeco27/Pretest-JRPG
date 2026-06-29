@@ -6,7 +6,7 @@ public class CameraShakeManager : MonoBehaviour
     public static CameraShakeManager instance;
 
     [Header("Global Settings")]
-    [Tooltip("Kekuatan getaran global yang akan diterapkan ke semua efek shake.")]
+    [Tooltip("Global shake power")]
     public float globalShakeForce = 1f;
 
     private void Awake()

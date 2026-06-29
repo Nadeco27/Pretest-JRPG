@@ -72,6 +72,7 @@ public class MainMenuManager : MonoBehaviour
         startButton.interactable = false;
 
         ResetProgressionData();
+        if (InventoryManager.Instance != null) InventoryManager.Instance.ClearInventory();
 
         if (ScreenTransitionManager.Instance != null)
         {

@@ -98,7 +98,7 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
             {
                 if (WarningMessageUI.Instance != null)
                 {
-                    WarningMessageUI.Instance.ShowWarning("You doesn't have any item");
+                    WarningMessageUI.Instance.ShowWarning("You don't have any item");
                 }
                 return;
             }
@@ -221,7 +221,7 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
                 }
                 else // Ranged
                 {
-                    // Gunakan prefab bawaan ActionData (atau Fireball jika kosong)
+                    // Use projectile prefab to animate ranged atteck
                     GameObject projPrefab = action.projectilePrefab != null ? action.projectilePrefab : Resources.Load<GameObject>("Fireball");
                     StartCoroutine(playerAnimator.RangedAttackRoutine(enemyTransform, projPrefab, () => 
                     {
@@ -326,14 +326,14 @@ public class BattleActionMenu : MonoBehaviour, IPointerClickHandler
             cg.blocksRaycasts = false;
         }
 
-        // Run Fade Alpha and Scale transformation simultaneously
+        // Run fade alpha and scale transformation simultaneously
         cg.DOFade(targetAlpha, fadeDuration).SetEase(Ease.OutQuad);
         
         cg.transform.DOScale(Vector3.one * targetScale, fadeDuration)
             .SetEase(isInteractable ? Ease.OutBack : Ease.OutQuad)
             .OnComplete(() =>
             {
-                // Re-enable interactive properties only when opening transition finishes completely
+                // Re-enable interactive only when opening transition finished
                 if (isInteractable)
                 {
                     cg.interactable = true;

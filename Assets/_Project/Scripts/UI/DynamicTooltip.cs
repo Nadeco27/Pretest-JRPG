@@ -61,7 +61,7 @@ public class DynamicTooltip : MonoBehaviour
         float normalizedX = mousePos.x / Screen.width;
         float normalizedY = mousePos.y / Screen.height;
 
-        // Smart Pivot Calculation
+        // Pivot Calculation
         float pivotX = normalizedX > 0.5f ? 1.05f : -0.05f;
         float pivotY = normalizedY > 0.5f ? 1.05f : -0.05f;
 

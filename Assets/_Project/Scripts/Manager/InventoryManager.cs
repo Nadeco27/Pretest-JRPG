@@ -29,7 +29,6 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake()
     {
-        // Enforce persistent singleton architecture
         if (Instance == null)
             {
                 Instance = this;
@@ -44,6 +43,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
+        if (PauseManager.Instance != null && PauseManager.Instance.isPaused) return;
         HandleKeyboardInput();
     }
 
@@ -176,6 +176,21 @@ public class InventoryManager : MonoBehaviour
                 backpackUI.RefreshInventoryUI(inventoryDatabase);
             }
         }
+    }
+
+    public void ClearInventory()
+    {
+        if (inventoryDatabase != null)
+        {
+            inventoryDatabase.Clear();
+        }
+
+        if (preBattleBackup != null)
+        {
+            preBattleBackup.Clear();
+        }
+
+        Debug.Log("[InventoryManager] Item list removed!");
     }
 
     // Helper conversion method to pipe raw database data arrays directly

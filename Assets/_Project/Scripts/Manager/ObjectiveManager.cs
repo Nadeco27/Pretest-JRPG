@@ -38,6 +38,8 @@ public class ObjectiveManager : MonoBehaviour
     public void NotifyObjectiveProgress(string objectiveId)
     {
         if (isTransitioning || isHiddenByDialogue) return;
+        if (PauseManager.Instance != null && PauseManager.Instance.isPaused) return;
+        if (InventoryManager.Instance != null && InventoryManager.Instance.IsBackpackOpen()) return;
 
         ObjectiveData completedObjective = currentActiveObjectives.Find(o => o.objectiveId == objectiveId);
         

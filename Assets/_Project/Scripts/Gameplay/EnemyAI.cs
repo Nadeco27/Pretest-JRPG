@@ -43,7 +43,7 @@ public class EnemyAI : MonoBehaviour
         float timer = 0f;
         while (timer < thinkingDelay)
         {
-            // If State suddenly change to BUSY because of dialogue Fungus, stop action routine and wat for turn
+            // If State suddenly change to BUSY because of dialogue Fungus, stop action routine and wait for turn
             while (BattleManager.Instance != null && BattleManager.Instance.state == BattleState.BUSY_CUTSCENE)
             {
                 yield return null;
@@ -97,7 +97,7 @@ public class EnemyAI : MonoBehaviour
 
     private IEnumerator ExecuteChosenActionRoutine(ActionData action)
     {
-        Debug.Log($"[{myUnit.unitName} AI] Decided to cast: {action.actionName}");
+        Debug.Log($"[{myUnit.unitName} AI] Decided: {action.actionName}");
 
         if (action.animationType == ActionAnimationType.Melee)
         {
@@ -121,7 +121,7 @@ public class EnemyAI : MonoBehaviour
 
     private void ExecuteDefend()
     {
-        Debug.Log($"[{myUnit.unitName} AI] Decided to stand ground: DEFEND");
+        Debug.Log($"[{myUnit.unitName} AI] Decided: DEFEND");
         myUnit.SetDefend(true);
         EndTurn();
     }

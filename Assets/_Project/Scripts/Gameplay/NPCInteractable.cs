@@ -14,6 +14,9 @@ public class NPCInteractable : InteractableBase
 
     public override void Interact()
     {
+        // If dialogue is still running, then ignore input
+        if (npcFlowchart != null && npcFlowchart.HasExecutingBlocks()) return;
+
         HidePrompt();
 
         // Fungus dialogue trigger
@@ -23,7 +26,7 @@ public class NPCInteractable : InteractableBase
         }
         else
         {
-            Debug.LogWarning($"[NPC Interactable] Flowchart atau Block '{dialogueBlockName}' tidak ditemukan!");
+            Debug.LogWarning($"[NPC Interactable] Flowchart or Block '{dialogueBlockName}' not found!");
         }
     }
 

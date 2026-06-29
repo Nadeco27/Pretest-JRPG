@@ -37,7 +37,7 @@ public class EnemyEncounter : MonoBehaviour
             PlayerPrefs.SetInt("DestroyLastEnemyTrigger", 0);
             PlayerPrefs.SetString("LastEncounterID", "");
             
-            Debug.Log($"[EnemyEncounter] {encounterID} sudah dikalahkan. Menghapus dari map.");
+            Debug.Log($"[EnemyEncounter] {encounterID} already defeated. Removing from map.");
             Destroy(gameObject);
         }
     }

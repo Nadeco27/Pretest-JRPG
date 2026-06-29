@@ -22,7 +22,7 @@ public class NotificationRowUI : MonoBehaviour
         canvasGroup.alpha = 0f;
     }
 
-    // Injects the item data and starts the independent fade lifecycle
+    // Injects the item data and starts the fade
     public void SetupAndPlay(ItemData item, int amount)
     {
         itemText.text = $"{item.itemName} x{amount}";

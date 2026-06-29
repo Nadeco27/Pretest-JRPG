@@ -15,6 +15,14 @@ public class LootDrop
 [RequireComponent(typeof(Collider2D))]
 public class CardboardInteractable : InteractableBase
 {
+    [Header("Save System")]
+    [Tooltip("Fill wiith unique ID every cardbox")]
+    [SerializeField] private string uniqueBoxId;
+
+    [Header("Visual Effects")]
+    [Tooltip("Fiil with SparkleVFX particle")]
+    [SerializeField] private ParticleSystem sparkleParticle;
+
     [Header("Loot Configuration")]
     [Tooltip("Exact number of items the player will pull from this box.")]
     [SerializeField] private int itemsToDrop = 1;
@@ -27,12 +35,37 @@ public class CardboardInteractable : InteractableBase
 
     private bool hasBeenLooted = false;
 
+    private void Start()
+    {
+        if (!string.IsNullOrEmpty(uniqueBoxId))
+        {
+            // Take collected data (1 = colected)
+            int isLooted = PlayerPrefs.GetInt("Looted_" + uniqueBoxId, 0);
+            
+            if (isLooted == 1)
+            {
+                SetAsAlreadyLooted();
+            }
+        }
+    }
     public override void Interact()
     {
         if (hasBeenLooted) return;
 
         hasBeenLooted = true;
         HidePrompt();
+
+        // Save cardboard as looted
+        if (!string.IsNullOrEmpty(uniqueBoxId))
+        {
+            PlayerPrefs.SetInt("Looted_" + uniqueBoxId, 1);
+            PlayerPrefs.Save();
+        }
+        // Disable particle
+        if (sparkleParticle != null)
+        {
+            sparkleParticle.Stop();
+        }
 
         AudioManager.Instance.Play("CardboardOpen");
 
@@ -47,7 +80,7 @@ public class CardboardInteractable : InteractableBase
             }
         }
 
-        // Progress the optional tutorial objective
+        // TUTORIAL : If there is any interaction with cardboard, mark tutorial as complete
         ObjectiveManager.Instance.NotifyObjectiveProgress("InteractTutorial");
 
         if (itemsToDrop <= 0 || possibleDrops.Count == 0)
@@ -69,6 +102,25 @@ public class CardboardInteractable : InteractableBase
         else
         {
             Debug.LogWarning("Fungus Flowchart or Block is missing for the empty box!");
+        }
+    }
+
+    private void SetAsAlreadyLooted()
+    {
+        hasBeenLooted = true;
+
+        // Disbale particle
+        if (sparkleParticle != null)
+        {
+            sparkleParticle.Stop();
+            sparkleParticle.gameObject.SetActive(false);
+        }
+
+        // Disable interact collider
+        Collider2D[] colliders = GetComponents<Collider2D>();
+        foreach (Collider2D col in colliders)
+        {
+            if (col.isTrigger) col.enabled = false;
         }
     }
 

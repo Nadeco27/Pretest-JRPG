@@ -15,7 +15,7 @@ public class BackpackUI : MonoBehaviour
     [SerializeField] private Transform slotContainer;
     [SerializeField] private InventorySlotUI slotPrefab;
 
-    [Header("Red Description Panel Components")]
+    [Header("Description Panel Components")]
     [SerializeField] private GameObject descriptionPanel;
     [SerializeField] private TextMeshProUGUI itemNameText;
     [SerializeField] private TextMeshProUGUI itemAmountText;
@@ -43,7 +43,6 @@ public class BackpackUI : MonoBehaviour
             parentCanvas.worldCamera = Camera.main;
         }
 
-        // Programmatically assign button click to avoid missing reference bugs
         if (backpackButton != null)
         {
             backpackButton.onClick.RemoveAllListeners();

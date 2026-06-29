@@ -79,8 +79,9 @@ public class BattleActionSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        RefreshTooltipUI();
+
         if (btn != null && !btn.interactable) return;
-        
         if (!HasEnoughStats()) return; 
 
         if (textRectTransform != null)
@@ -93,14 +94,11 @@ public class BattleActionSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
         transform.DOScale(originalSlotScale * 1.05f, textAnimationSpeed).SetEase(Ease.OutQuad);
 
         if (AudioManager.Instance != null) AudioManager.Instance.Play("ButtonHover");
-
-        RefreshTooltipUI();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         transform.DOKill();
-        if (DynamicTooltip.Instance != null) DynamicTooltip.Instance.HideTooltip();
         if (textRectTransform != null) textRectTransform.DOKill();
 
         // Set text and button to original position
@@ -109,6 +107,8 @@ public class BattleActionSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
         {
             textRectTransform.DOAnchorPos(originalTextPosition, textAnimationSpeed).SetEase(Ease.OutQuad);
         }
+
+        if (DynamicTooltip.Instance != null) DynamicTooltip.Instance.HideTooltip();
     }
 
     private void OnDisable()
@@ -126,6 +126,8 @@ public class BattleActionSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     private void OnSlotClicked()
     {
+        if (EventSystem.current != null) EventSystem.current.SetSelectedGameObject(null);
+
         if (!HasEnoughStats())
         {
             if (WarningMessageUI.Instance != null) WarningMessageUI.Instance.ShowWarning("Cannot afford cost of action");

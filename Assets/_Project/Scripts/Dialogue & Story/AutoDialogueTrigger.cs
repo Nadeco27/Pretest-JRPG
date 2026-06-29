@@ -23,16 +23,13 @@ public class AutoDialogueEvent
 public class AutoDialogueTrigger : MonoBehaviour
 {
     [Header("Daftar Dialog Otomatis")]
-    [Tooltip("System wil check in order, and execute the first fulfilled dialogue")]
-    public List<AutoDialogueEvent
-> dialogEvents = new List<AutoDialogueEvent
->();
+    [Tooltip("System will check in order, and execute the first fulfilled dialogue")]
+    public List<AutoDialogueEvent> dialogEvents = new List<AutoDialogueEvent>();
 
     private void Start()
     {
         // Check every event in list
-        foreach (AutoDialogueEvent
-    evt in dialogEvents)
+        foreach (AutoDialogueEvent evt in dialogEvents)
         {
             // Check if dialogue event already done
             if (PlayerPrefs.GetInt("EventDone_" + evt.uniqueEventID, 0) == 1)
@@ -55,7 +52,7 @@ public class AutoDialogueTrigger : MonoBehaviour
             
             if (evt.targetFlowchart != null && !string.IsNullOrEmpty(evt.blockName))
             {
-                Debug.Log($"[AutoDialogManager] Trigger dialogue: {evt.blockName} (ID: {evt.uniqueEventID})");
+                Debug.Log($"[AutoDialogueManager] Trigger dialogue: {evt.blockName} (ID: {evt.uniqueEventID})");
                 evt.targetFlowchart.ExecuteBlock(evt.blockName);
             }
 

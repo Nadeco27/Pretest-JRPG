@@ -24,7 +24,6 @@ public class ScreenTransitionManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -63,7 +62,7 @@ public class ScreenTransitionManager : MonoBehaviour
     {
         if (transitionCanvas != null)
         {
-            // Camera.main automatically finds the first enabled camera tagged "MainCamera"
+            // Automatically finds the first enabled camera tagged "MainCamera"
             transitionCanvas.worldCamera = Camera.main;
         }
     }
@@ -144,7 +143,7 @@ public class ScreenTransitionManager : MonoBehaviour
         Debug.Log("[ScreenTransitionManager] Application Quit Executed.");
         Application.Quit();
 
-        // Optional: Force stop if running inside Unity Editor
+        // Force stop if running inside Unity Editor
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
         #endif
