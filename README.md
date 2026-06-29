@@ -5,6 +5,6 @@ A small project used to make a JRPG game for Toge Productions pre-interview test
 The Dream Confessor
 
 ## Controls
-WASD or Arrow Key = Move,
+Move = WASD or Arrow Key,
 Interact = Space,
 Button Click = Left-CLick.
